@@ -4,6 +4,7 @@ import CanvasComponent from '../components/CanvasComponent.vue'
 import UiComponent from '../components/UiComponent.vue'
 
 const isDrawerOpen = ref(false)
+const canvas = ref(null)
 
 const currentWorkshop = ref({
   image: "",
@@ -20,6 +21,7 @@ const openDrawer = () => {
 
 const closeDrawer = () => {
   isDrawerOpen.value = false
+  canvas.value.resetObjectSelection()
 }
 
 const selectWorkshop = (image, indicator1, indicator2, indicator3, indicator4, date) => {
@@ -36,7 +38,8 @@ const selectWorkshop = (image, indicator1, indicator2, indicator3, indicator4, d
 
 <template>
   <main>
-    <CanvasComponent @open-drawer="openDrawer" @close-drawer="closeDrawer" @select-workshop="selectWorkshop" />
+    <CanvasComponent @open-drawer="openDrawer" @close-drawer="closeDrawer" @select-workshop="selectWorkshop"
+      ref="canvas" />
     <UiComponent :is-drawer-open="isDrawerOpen" :current-workshop="currentWorkshop" @close-drawer="closeDrawer" />
   </main>
 </template>

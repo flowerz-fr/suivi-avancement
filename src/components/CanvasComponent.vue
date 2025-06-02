@@ -5,12 +5,12 @@ const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
 
 // Credits: https://roblouie.com/article/617
 class CanvasObject {
-  constructor(id, x, y, scale, image, indicator1, indicator2, indicator3, indicator4, date) {
+  constructor(id, x, y, scalex, scaley, image, indicator1, indicator2, indicator3, indicator4, date) {
     this.id = id
-    this.x = x + window.innerWidth / 2
-    this.y = y + window.innerHeight / 2
-    this.width = 302 * scale
-    this.height = 302 * scale
+    this.width = 302 * scalex
+    this.height = 302 * scaley
+    this.x = x - this.width / 2
+    this.y = y - this.height / 2
     this.isSelected = false
     this.image = image
     this.indicator1 = indicator1
@@ -26,14 +26,11 @@ class CanvasObject {
 }
 
 const objects = [
-  new CanvasObject("orange", 975, -230, 0.25, "hade", 1, 2, 3, 4, "01/02/2023"),
-  new CanvasObject("red", 792, -145, 0.25, "hade", 1, 15, 3, 4, "01/10/2023"),
-  new CanvasObject("green", 840, -280, 0.4, "hade", 1, 65, 3, 4, "01/06/2023"),
-  new CanvasObject("green", 670, -240, 0.3, "mau", 1, 19, 3, 4, "01/02/2023"),
-  new CanvasObject("green", 472, -292, 0.43, "mau", 1, 1, 3, 4, "01/02/2023"),
-  new CanvasObject("blue", 293, -130, 0.25, "mapu", 1, 9, 3, 4, "01/02/2023"),
-  new CanvasObject("blue", -7, -147, 0.28, "mapu", 1, 94, 3, 4, "01/02/2023"),
-  new CanvasObject("blue", -7, -147, 0.28, "mapu", 1, 36, 3, 4, "01/02/2023"),
+  new CanvasObject("blue", 280, 270, 0.62, 0.2, "silo130", 1, 2, 3, 4, "01/02/2023"),
+  new CanvasObject("blue", 914, 370, 0.91, 0.32, "hade", 5, 6, 7, 8, "04/05/2023"),
+  new CanvasObject("green", 1205, 275, 0.93, 0.28, "hade", 9, 10, 11, 12, "05/06/2023"),
+  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "hade", 13, 14, 15, 16, "06/07/2023"),
+  new CanvasObject("orange", 1286, 344, 0.18, 0.18, "hade", 13, 14, 15, 16, "06/07/2023"),
 ]
 var canvas
 var context
@@ -42,28 +39,35 @@ var isMouseDown = false
 var isMoving = false
 var dragStartPosition = { x: 0, y: 0 }
 var currentTransformedCursor
-var outlineSpacing = 3
 
-function updateDisplay() {
+const updateDisplay = () => {
   context.save()
   context.setTransform(1, 0, 0, 1, 0, 0)
   context.clearRect(0, 0, canvas.width, canvas.height)
   context.restore()
-  context.drawImage(background, 0, 0, 2183, 805)
+  context.lineWidth = 2
+  context.drawImage(background, 0, 0, 2200, 622)
   objects.forEach((object) => {
-    context.strokeStyle = object.isSelected ? "rgb(230, 230, 0)" : "rgb(255, 255, 255)"
+    context.strokeStyle = object.isSelected ? "oklch(86.5% 0.127 207.078)" : "rgba(255, 255, 255, 0.7)"
     context.beginPath()
-    context.roundRect(object.x - outlineSpacing, object.y - outlineSpacing, object.width + outlineSpacing * 2, object.height + outlineSpacing * 2, [15])
+    context.roundRect(object.x, object.y, object.width, object.height, [15])
     context.stroke()
   })
 }
 
-function getTransformedPoint(x, y) {
+const resetObjectSelection = () => {
+  objects.forEach((object) => {
+    object.isSelected = false
+  })
+  updateDisplay()
+}
+
+const getTransformedPoint = (x, y) => {
   const originalPoint = new DOMPoint(x, y)
   return context.getTransform().invertSelf().transformPoint(originalPoint)
 }
 
-function isObjectHovered(object, mouseCoordinates) {
+const isObjectHovered = (object, mouseCoordinates) => {
   return (
     mouseCoordinates.x > (object.x) &&
     mouseCoordinates.x < (object.x + object.width) &&
@@ -72,12 +76,12 @@ function isObjectHovered(object, mouseCoordinates) {
   )
 }
 
-function onMouseDown(event) {
+const onMouseDown = (event) => {
   isMouseDown = true
   isMoving = false // defaulting to false to compare if onMouseMove sets it to true in the meantime
   dragStartPosition = getTransformedPoint(event.offsetX, event.offsetY)
   // waiting between the moment of click and .005s after to see if mouse has moved to see if click is dragged or not
-  setTimeout(function () {
+  setTimeout(() => {
     if (!isMoving) {
       // is not dragged
       emit("closeDrawer")
@@ -96,7 +100,7 @@ function onMouseDown(event) {
   }, 50)
 }
 
-function onMouseMove(event) {
+const onMouseMove = (event) => {
   isMoving = true
   currentTransformedCursor = getTransformedPoint(event.offsetX, event.offsetY)
   objects.forEach((object) => {
@@ -116,11 +120,11 @@ function onMouseMove(event) {
   }
 }
 
-function onMouseUp() {
+const onMouseUp = () => {
   isMouseDown = false
 }
 
-function onWheel(event) {
+const onWheel = (event) => {
   const zoom = event.deltaY < 0 ? 1.1 : 0.9
   context.translate(currentTransformedCursor.x, currentTransformedCursor.y)
   context.scale(zoom, zoom)
@@ -129,8 +133,9 @@ function onWheel(event) {
   event.preventDefault()
 }
 
+defineExpose({ resetObjectSelection })
 onMounted(() => {
-  background.src = "/src/assets/images/background.jpg"
+  background.src = "/src/assets/images/plan.jpg"
   canvas = document.getElementById("canvas")
   context = canvas.getContext("2d")
   canvas.width = window.innerWidth
@@ -140,7 +145,7 @@ onMounted(() => {
   canvas.addEventListener("mousemove", onMouseMove)
   canvas.addEventListener("mouseup", onMouseUp)
   canvas.addEventListener("wheel", onWheel)
-  setTimeout(function () {
+  setTimeout(() => {
     updateDisplay()
   }, 1)
 })

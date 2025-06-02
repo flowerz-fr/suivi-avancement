@@ -9,6 +9,25 @@ body {
   font-style: normal;
 }
 
+h1 {
+  margin-top: 1em;
+  font-size: var(--text-2xl); /* 1.5rem (24px) */ 
+  line-height: var(--text-2xl--line-height); /* calc(2 / 1.5) */
+  font-weight: 700;
+}
+
+h2 {
+  margin-top: 0.3em;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
 p {
   color: oklch(55.2% 0.016 285.938)
 }

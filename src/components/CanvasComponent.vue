@@ -1,16 +1,23 @@
 <script setup>
 import { onMounted } from 'vue'
+
+const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
+
 // Credits: https://roblouie.com/article/617
 class CanvasObject {
-  constructor(id, color, x, y, scale) {
+  constructor(id, x, y, scale, image, indicator1, indicator2, indicator3, indicator4, date) {
     this.id = id
-    this.image = new Image()
-    this.image.src = color == "green" ? "/src/assets/images/green.png" : "/src/assets/images/red.png"
     this.x = x + window.innerWidth / 2
     this.y = y + window.innerHeight / 2
-    this.width = this.image.width * scale
-    this.height = this.image.height * scale
+    this.width = 302 * scale
+    this.height = 302 * scale
     this.isSelected = false
+    this.image = image
+    this.indicator1 = indicator1
+    this.indicator2 = indicator2
+    this.indicator3 = indicator3
+    this.indicator4 = indicator4
+    this.date = date
   }
 
   getGlobalCoordinates() {
@@ -18,69 +25,36 @@ class CanvasObject {
   }
 }
 
-class CanvasLink {
-  constructor(startId, endId) {
-    this.startId = startId
-    this.endId = endId
-  }
-}
-
+const objects = [
+  new CanvasObject("orange", 975, -230, 0.25, "hade", 1, 2, 3, 4, "01/02/2023"),
+  new CanvasObject("red", 792, -145, 0.25, "hade", 1, 15, 3, 4, "01/10/2023"),
+  new CanvasObject("green", 840, -280, 0.4, "hade", 1, 65, 3, 4, "01/06/2023"),
+  new CanvasObject("green", 670, -240, 0.3, "mau", 1, 19, 3, 4, "01/02/2023"),
+  new CanvasObject("green", 472, -292, 0.43, "mau", 1, 1, 3, 4, "01/02/2023"),
+  new CanvasObject("blue", 293, -130, 0.25, "mapu", 1, 9, 3, 4, "01/02/2023"),
+  new CanvasObject("blue", -7, -147, 0.28, "mapu", 1, 94, 3, 4, "01/02/2023"),
+  new CanvasObject("blue", -7, -147, 0.28, "mapu", 1, 36, 3, 4, "01/02/2023"),
+]
 var canvas
 var context
-const objects = [
-  new CanvasObject("1", "red", 0, 0, 0.25),
-  new CanvasObject("2", "green", 200, 200, 0.25)
-]
-const links = [
-  new CanvasLink("1", "2")
-]
+var background = new Image()
 var isMouseDown = false
 var isMoving = false
 var dragStartPosition = { x: 0, y: 0 }
 var currentTransformedCursor
 var outlineSpacing = 3
 
-function getCanvasObjectById(id) {
-  var res = null
-  objects.forEach((object) => {
-    if (object.id == id) res = object
-  })
-  return res
-}
-
 function updateDisplay() {
   context.save()
   context.setTransform(1, 0, 0, 1, 0, 0)
   context.clearRect(0, 0, canvas.width, canvas.height)
   context.restore()
-  links.forEach((link) => {
-    context.beginPath()
-    context.setLineDash([15, 5])
-    context.strokeStyle = "black"
-    var startCoordinates = getCanvasObjectById(link.startId).getGlobalCoordinates()
-    var endCoordinates = getCanvasObjectById(link.endId).getGlobalCoordinates()
-    context.moveTo(startCoordinates.x, startCoordinates.y)
-    context.lineTo(endCoordinates.x, endCoordinates.y)
-    context.stroke()
-    context.setLineDash([])
-  })
+  context.drawImage(background, 0, 0, 2183, 805)
   objects.forEach((object) => {
-    context.shadowBlur = 10
-    context.shadowColor = "rgb(128, 128, 128)"
-    context.drawImage(
-      object.image,
-      object.x,
-      object.y,
-      object.width,
-      object.height
-    )
-    if (object.isSelected) {
-      context.strokeStyle = "rgb(255, 255, 255)"
-      context.beginPath()
-      context.roundRect(object.x - outlineSpacing, object.y - outlineSpacing, object.width + outlineSpacing * 2, object.height + outlineSpacing * 2, [15])
-      context.stroke()
-    }
-    context.shadowBlur = 0
+    context.strokeStyle = object.isSelected ? "rgb(230, 230, 0)" : "rgb(255, 255, 255)"
+    context.beginPath()
+    context.roundRect(object.x - outlineSpacing, object.y - outlineSpacing, object.width + outlineSpacing * 2, object.height + outlineSpacing * 2, [15])
+    context.stroke()
   })
 }
 
@@ -106,9 +80,12 @@ function onMouseDown(event) {
   setTimeout(function () {
     if (!isMoving) {
       // is not dragged
+      emit("closeDrawer")
       objects.forEach((object) => {
         if (isObjectHovered(object, dragStartPosition)) {
           object.isSelected = true
+          emit("openDrawer")
+          emit("selectWorkshop", object.image, object.indicator1, object.indicator2, object.indicator3, object.indicator4, object.date)
         }
         else {
           object.isSelected = false
@@ -122,6 +99,14 @@ function onMouseDown(event) {
 function onMouseMove(event) {
   isMoving = true
   currentTransformedCursor = getTransformedPoint(event.offsetX, event.offsetY)
+  objects.forEach((object) => {
+    if (isObjectHovered(object, dragStartPosition)) {
+      canvas.style.cursor = "pointer"
+    }
+    else {
+      canvas.style.cursor = "move"
+    }
+  })
   if (isMouseDown) {
     context.translate(
       currentTransformedCursor.x - dragStartPosition.x,
@@ -145,6 +130,7 @@ function onWheel(event) {
 }
 
 onMounted(() => {
+  background.src = "/src/assets/images/background.jpg"
   canvas = document.getElementById("canvas")
   context = canvas.getContext("2d")
   canvas.width = window.innerWidth

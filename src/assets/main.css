@@ -8,3 +8,7 @@ body {
   font-weight: 500;
   font-style: normal;
 }
+
+p {
+  color: oklch(55.2% 0.016 285.938)
+}

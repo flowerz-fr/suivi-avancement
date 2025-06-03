@@ -2,6 +2,7 @@
 import EvolutionIndicatorComponent from './EvolutionIndicatorComponent.vue'
 import CloseButtonComponent from './CloseButtonComponent.vue'
 import BarGraphComponent from './BarGraphComponent.vue'
+import Workshop from '@/stores/Workshop'
 
 const props = defineProps({
     isDrawerOpen: {
@@ -9,18 +10,7 @@ const props = defineProps({
         required: true
     },
     currentWorkshop: {
-        type: {
-            image: String,
-            a: Number,
-            c: Number,
-            d: Number,
-            dr: Number,
-            date: String,
-            ta: Number,
-            tc: Number,
-            td: Number,
-            tdr: Number,
-        },
+        type: Workshop,
         required: true
     }
 })

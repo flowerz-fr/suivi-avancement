@@ -1,21 +1,11 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import ApexCharts from 'apexcharts'
+import Workshop from '@/stores/Workshop'
 
 const props = defineProps({
     currentWorkshop: {
-        type: {
-            image: String,
-            a: Number,
-            c: Number,
-            d: Number,
-            dr: Number,
-            date: String,
-            ta: Number,
-            tc: Number,
-            td: Number,
-            tdr: Number,
-        },
+        type: Workshop,
         required: true
     }
 })
@@ -128,7 +118,6 @@ const refresh = () => {
 }
 
 var chart
-
 onMounted(() => {
     chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig)
     chart.render()

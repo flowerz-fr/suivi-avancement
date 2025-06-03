@@ -3,6 +3,7 @@ import InformationDrawerComponent from "./InformationDrawerComponent.vue"
 import BottomFloatingComponent from "./BottomFloatingComponent.vue"
 import TopFloatingComponent from "./TopFloatingComponent.vue"
 import DataCardComponent from "./DataCardComponent.vue"
+import Workshop from '@/stores/Workshop'
 
 const props = defineProps({
     isDrawerOpen: {
@@ -10,18 +11,7 @@ const props = defineProps({
         required: true
     },
     currentWorkshop: {
-        type: {
-            image: String,
-            a: Number,
-            c: Number,
-            d: Number,
-            dr: Number,
-            date: String,
-            ta: Number,
-            tc: Number,
-            td: Number,
-            tdr: Number,
-        },
+        type: Workshop,
         required: true
     }
 })

@@ -1,40 +1,10 @@
 <script setup>
-import { onMounted } from 'vue'
+import { useWorkshopStore } from '@/stores/workshops'
+import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
 
-class CanvasObject {
-  constructor(id, x, y, scalex, scaley, image, a, c, d, dr, end, ta, tc, td, tdr) {
-    this.id = id
-    this.width = 302 * scalex
-    this.height = 302 * scaley
-    this.x = x - this.width / 2
-    this.y = y - this.height / 2
-    this.isSelected = false
-    this.image = image
-    this.a = a // assainissement
-    this.c = c // caracterisation
-    this.d = d // dementelement
-    this.dr = dr // declassement radiologique
-    this.ta = ta // total assainissement
-    this.tc = tc // total caracterisation
-    this.td = td // total dementelement
-    this.tdr = tdr // total declassement radiologique
-    this.end = end // fin de chantier
-  }
-  
-  getGlobalCoordinates() {
-    return { x: this.x + this.width / 2, y: this.y + this.height / 2 }
-  }
-}
-
-const objects = [
-  new CanvasObject("blue", 280, 270, 0.62, 0.2, "silo130", 1, 2, 3, 4, "01/02/2023", 4, 4, 4, 4),
-  new CanvasObject("blue", 914, 370, 0.91, 0.32, "mapu", 5, 6, 7, 8, "04/05/2023", 45, 84, 23 ,51),
-  new CanvasObject("green", 1205, 275, 0.93, 0.28, "at1", 9, 10, 11, 12, "05/06/2023", 12, 525 ,5, 22),
-  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "mau", 13, 14, 15, 16, "06/07/2023", 75, 96, 52, 48),
-  new CanvasObject("orange", 1286, 344, 0.18, 0.18, "hade", 13, 14, 15, 16, "06/07/2023", 12, 23, 45, 56),
-]
+var objects = ref(null)
 var canvas
 var context
 var background = new Image()
@@ -51,7 +21,7 @@ const updateDisplay = () => {
   context.restore()
   context.lineWidth = 2
   context.drawImage(background, 0, 0, 2200, 622)
-  objects.forEach((object) => {
+  objects.value.forEach((object) => {
     context.strokeStyle = object.isSelected ? "oklch(86.5% 0.127 207.078)" : "rgba(255, 255, 255, 0.7)"
     context.beginPath()
     context.roundRect(object.x, object.y, object.width, object.height, [15])
@@ -60,7 +30,7 @@ const updateDisplay = () => {
 }
 
 const resetObjectSelection = () => {
-  objects.forEach((object) => {
+  objects.value.forEach((object) => {
     object.isSelected = false
   })
   updateDisplay()
@@ -89,11 +59,11 @@ const onMouseDown = (event) => {
     if (!isMoving) {
       // is not dragged
       emit("closeDrawer")
-      objects.forEach((object) => {
+      objects.value.forEach((object) => {
         if (isObjectHovered(object, dragStartPosition)) {
           object.isSelected = true
           emit("openDrawer")
-          emit("selectWorkshop", object.image, object.a, object.c, object.d, object.dr, object.end, object.ta, object.tc, object.td, object.tdr)
+          emit("selectWorkshop", object)
         }
         else {
           object.isSelected = false
@@ -107,12 +77,13 @@ const onMouseDown = (event) => {
 const onMouseMove = (event) => {
   isMoving = true
   currentTransformedCursor = getTransformedPoint(event.offsetX, event.offsetY)
-  objects.forEach((object) => {
+  objects.value.forEach((object) => {
     if (isObjectHovered(object, dragStartPosition)) {
-      canvas.style.cursor = "pointer"
+      document.body.style.cursor = "pointer"
+      console.log("oeee")
     }
     else {
-      canvas.style.cursor = "move"
+      document.body.style.cursor = "move"
     }
   })
   if (isMouseDown) {
@@ -138,7 +109,9 @@ const onWheel = (event) => {
 }
 
 defineExpose({ resetObjectSelection })
+var store = useWorkshopStore()
 onMounted(() => {
+  objects.value = store.workshops
   background.src = "/src/assets/images/plan.jpg"
   canvas = document.getElementById("canvas")
   context = canvas.getContext("2d")

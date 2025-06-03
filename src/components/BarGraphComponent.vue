@@ -107,19 +107,22 @@ const chartConfig = {
     tooltip: {
         theme: "light",
         custom: (series, seriesIndex, dataPointIndex, w) => {
-            console.log(series)
             return "<span class=\"px-1\">" + series.series[0][series.dataPointIndex] + "%</span>"
         }
     },
 }
 
+const formatToPercent = (value) => {
+    return Math.ceil(Math.min(Math.max(value, 0), 100))
+}
+
 const refresh = () => {
     chart.updateSeries([{
         data: [
-            props.currentWorkshop.a * 100 / props.currentWorkshop.ta,
-            props.currentWorkshop.c * 100 / props.currentWorkshop.tc,
-            props.currentWorkshop.d * 100 / props.currentWorkshop.td,
-            props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr
+            formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta),
+            formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc),
+            formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td),
+            formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr)
         ]
     }])
 }
@@ -129,6 +132,7 @@ var chart
 onMounted(() => {
     chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig)
     chart.render()
+    refresh()
 })
 
 watch(props, (o, n) => {

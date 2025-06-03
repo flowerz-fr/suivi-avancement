@@ -25,7 +25,7 @@ const props = defineProps({
             <p class="grow text-xs">Évolution</p>
             <div class="flex">
                 <span class="text-xs"
-                    :class="props.evolution.charAt(0) == '+' ? 'text-success-500' : 'text-danger-500'">{{
+                    :class="props.evolution.charAt(0) == '+' ? 'text-success' : 'text-danger'">{{
                         props.evolution }}</span>
                 <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />
             </div>

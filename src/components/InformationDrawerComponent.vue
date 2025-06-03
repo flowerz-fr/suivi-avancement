@@ -40,29 +40,29 @@ const onCloseButtonClicked = () => {
                 <p class="text-xs">Fin de chantier le {{ props.currentWorkshop.date }}</p>
                 <div class="my-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100">
-                        <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm/6 font-semibold">Indicateur 1</dt>
+                        <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                            <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ props.currentWorkshop.indicator1 }}% </h6>
                                 <EvolutionIndicatorComponent :has-changed="true" :is-better="false" />
                             </dd>
                         </div>
-                        <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm/6 font-semibold">Indicateur 2</dt>
+                        <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                            <dt class="text-sm/6 sm:col-span-2 font-semibold">Caractérisation</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ props.currentWorkshop.indicator2 }}% </h6>
                                 <EvolutionIndicatorComponent :has-changed="false" :is-better="true" />
                             </dd>
                         </div>
-                        <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm/6 font-semibold">Indicateur 3</dt>
+                        <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                            <dt class="text-sm/6 sm:col-span-2 font-semibold">Démentèlement</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ props.currentWorkshop.indicator3 }}% </h6>
                                 <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />
                             </dd>
                         </div>
-                        <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm/6 font-semibold">Indicateur 4</dt>
+                        <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                            <dt class="text-sm/6 sm:col-span-2 font-semibold">Déclassement radiologique</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ props.currentWorkshop.indicator4 }}% </h6>
                                 <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />

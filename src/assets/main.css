@@ -31,3 +31,11 @@ h3 {
 p {
   color: oklch(55.2% 0.016 285.938)
 }
+
+.text-success {
+  color: #039855;
+}
+
+.text-danger {
+  color: #D92D20;
+}

@@ -4,7 +4,7 @@ import { onMounted } from 'vue'
 const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
 
 class CanvasObject {
-  constructor(id, x, y, scalex, scaley, image, a, c, d, dr, end) {
+  constructor(id, x, y, scalex, scaley, image, a, c, d, dr, end, ta, tc, td, tdr) {
     this.id = id
     this.width = 302 * scalex
     this.height = 302 * scaley
@@ -16,6 +16,10 @@ class CanvasObject {
     this.c = c // caracterisation
     this.d = d // dementelement
     this.dr = dr // declassement radiologique
+    this.ta = ta // total assainissement
+    this.tc = tc // total caracterisation
+    this.td = td // total dementelement
+    this.tdr = tdr // total declassement radiologique
     this.end = end // fin de chantier
   }
   
@@ -26,9 +30,9 @@ class CanvasObject {
 
 const objects = [
   new CanvasObject("blue", 280, 270, 0.62, 0.2, "silo130", 1, 2, 3, 4, "01/02/2023"),
-  new CanvasObject("blue", 914, 370, 0.91, 0.32, "hade", 5, 6, 7, 8, "04/05/2023"),
-  new CanvasObject("green", 1205, 275, 0.93, 0.28, "hade", 9, 10, 11, 12, "05/06/2023"),
-  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "hade", 13, 14, 15, 16, "06/07/2023"),
+  new CanvasObject("blue", 914, 370, 0.91, 0.32, "mapu", 5, 6, 7, 8, "04/05/2023"),
+  new CanvasObject("green", 1205, 275, 0.93, 0.28, "at1", 9, 10, 11, 12, "05/06/2023"),
+  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "mau", 13, 14, 15, 16, "06/07/2023"),
   new CanvasObject("orange", 1286, 344, 0.18, 0.18, "hade", 13, 14, 15, 16, "06/07/2023"),
 ]
 var canvas
@@ -40,7 +44,7 @@ var dragStartPosition = { x: 0, y: 0 }
 var currentTransformedCursor
 
 // Credits: https://roblouie.com/article/617
-const upendDisplay = () => {
+const updateDisplay = () => {
   context.save()
   context.setTransform(1, 0, 0, 1, 0, 0)
   context.clearRect(0, 0, canvas.width, canvas.height)
@@ -59,7 +63,7 @@ const resetObjectSelection = () => {
   objects.forEach((object) => {
     object.isSelected = false
   })
-  upendDisplay()
+  updateDisplay()
 }
 
 const getTransformedPoint = (x, y) => {
@@ -89,14 +93,14 @@ const onMouseDown = (event) => {
         if (isObjectHovered(object, dragStartPosition)) {
           object.isSelected = true
           emit("openDrawer")
-          emit("selectWorkshop", object.image, object.a, object.c, object.d, object.dr, object.end)
+          emit("selectWorkshop", object.image, object.a, object.c, object.d, object.dr, object.end, object.ta, object.tc, object.td, object.tdr)
         }
         else {
           object.isSelected = false
         }
       })
     }
-    upendDisplay()
+    updateDisplay()
   }, 50)
 }
 
@@ -116,7 +120,7 @@ const onMouseMove = (event) => {
       currentTransformedCursor.x - dragStartPosition.x,
       currentTransformedCursor.y - dragStartPosition.y
     )
-    upendDisplay()
+    updateDisplay()
   }
 }
 
@@ -129,7 +133,7 @@ const onWheel = (event) => {
   context.translate(currentTransformedCursor.x, currentTransformedCursor.y)
   context.scale(zoom, zoom)
   context.translate(-currentTransformedCursor.x, -currentTransformedCursor.y)
-  upendDisplay()
+  updateDisplay()
   event.preventDefault()
 }
 
@@ -146,7 +150,7 @@ onMounted(() => {
   canvas.addEventListener("mouseup", onMouseUp)
   canvas.addEventListener("wheel", onWheel)
   setTimeout(() => {
-    upendDisplay()
+    updateDisplay()
   }, 1)
 })
 </script>

@@ -8,11 +8,15 @@ const canvas = ref(null)
 
 const currentWorkshop = ref({
   image: "",
-  indicator1: 2,
-  indicator2: 7,
-  indicator3: 0,
-  indicator4: 93,
-  date: "04/07/2023"
+  a: 0,
+  c: 0,
+  d: 0,
+  dr: 0,
+  date: "01/01/1979",
+  ta: 0,
+  tc: 0,
+  td: 0,
+  tdr: 0
 })
 
 const openDrawer = () => {
@@ -24,14 +28,18 @@ const closeDrawer = () => {
   canvas.value.resetObjectSelection()
 }
 
-const selectWorkshop = (image, indicator1, indicator2, indicator3, indicator4, date) => {
+const selectWorkshop = (image, a, c, d, dr, date, ta, tc, td, tdr) => {
   currentWorkshop.value = {
     image: image,
-    indicator1: indicator1,
-    indicator2: indicator2,
-    indicator3: indicator3,
-    indicator4: indicator4,
-    date: date
+    a: a,
+    c: c,
+    d: d,
+    dr: dr,
+    date: date,
+    ta: ta,
+    tc: tc,
+    td: td,
+    tdr: tdr
   }
 }
 </script>

@@ -29,11 +29,11 @@ class CanvasObject {
 }
 
 const objects = [
-  new CanvasObject("blue", 280, 270, 0.62, 0.2, "silo130", 1, 2, 3, 4, "01/02/2023"),
-  new CanvasObject("blue", 914, 370, 0.91, 0.32, "mapu", 5, 6, 7, 8, "04/05/2023"),
-  new CanvasObject("green", 1205, 275, 0.93, 0.28, "at1", 9, 10, 11, 12, "05/06/2023"),
-  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "mau", 13, 14, 15, 16, "06/07/2023"),
-  new CanvasObject("orange", 1286, 344, 0.18, 0.18, "hade", 13, 14, 15, 16, "06/07/2023"),
+  new CanvasObject("blue", 280, 270, 0.62, 0.2, "silo130", 1, 2, 3, 4, "01/02/2023", 4, 4, 4, 4),
+  new CanvasObject("blue", 914, 370, 0.91, 0.32, "mapu", 5, 6, 7, 8, "04/05/2023", 45, 84, 23 ,51),
+  new CanvasObject("green", 1205, 275, 0.93, 0.28, "at1", 9, 10, 11, 12, "05/06/2023", 12, 525 ,5, 22),
+  new CanvasObject("red", 1390, 274, 0.2905, 0.32, "mau", 13, 14, 15, 16, "06/07/2023", 75, 96, 52, 48),
+  new CanvasObject("orange", 1286, 344, 0.18, 0.18, "hade", 13, 14, 15, 16, "06/07/2023", 12, 23, 45, 56),
 ]
 var canvas
 var context

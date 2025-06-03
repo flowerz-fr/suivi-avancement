@@ -12,11 +12,15 @@ const props = defineProps({
     currentWorkshop: {
         type: {
             image: String,
-            indicator1: Number,
-            indicator2: Number,
-            indicator3: Number,
-            indicator4: Number,
-            date: String
+            a: Number,
+            c: Number,
+            d: Number,
+            dr: Number,
+            date: String,
+            ta: Number,
+            tc: Number,
+            td: Number,
+            tdr: Number,
         },
         required: true
     }

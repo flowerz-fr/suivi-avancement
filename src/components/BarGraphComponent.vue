@@ -1,12 +1,35 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import ApexCharts from 'apexcharts'
+
+const props = defineProps({
+    currentWorkshop: {
+        type: {
+            image: String,
+            a: Number,
+            c: Number,
+            d: Number,
+            dr: Number,
+            date: String,
+            ta: Number,
+            tc: Number,
+            td: Number,
+            tdr: Number,
+        },
+        required: true
+    }
+})
 
 const chartConfig = {
     series: [
         {
             name: "Complétion",
-            data: [90, 85, 75, 13],
+            data: [
+                props.currentWorkshop.a * 100 / props.currentWorkshop.ta + "% (" + props.currentWorkshop.a + "/" + props.currentWorkshop.ta + ")",
+                props.currentWorkshop.c * 100 / props.currentWorkshop.tc + "% (" + props.currentWorkshop.c + "/" + props.currentWorkshop.tc + ")",
+                props.currentWorkshop.d * 100 / props.currentWorkshop.td + "% (" + props.currentWorkshop.d + "/" + props.currentWorkshop.td + ")",
+                props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr + "% (" + props.currentWorkshop.dr + "/" + props.currentWorkshop.tdr + ")"
+            ],
         },
     ],
     chart: {
@@ -45,8 +68,8 @@ const chartConfig = {
             },
         },
         categories: [
-            "Caractérisation",
             "Assainissement",
+            "Caractérisation",
             "Démantèlement",
             "Déclassement radio",
         ],
@@ -60,6 +83,9 @@ const chartConfig = {
                 fontWeight: 400,
             },
         },
+        min: 0,
+        max: 100,
+        decimalsInFloat: 0
     },
     grid: {
         show: true,
@@ -79,13 +105,34 @@ const chartConfig = {
         opacity: 0.8,
     },
     tooltip: {
-        theme: "dark",
+        theme: "light",
+        custom: (series, seriesIndex, dataPointIndex, w) => {
+            console.log(series)
+            return "<span class=\"px-1\">" + series.series[0][series.dataPointIndex] + "%</span>"
+        }
     },
 }
 
+const refresh = () => {
+    chart.updateSeries([{
+        data: [
+            props.currentWorkshop.a * 100 / props.currentWorkshop.ta,
+            props.currentWorkshop.c * 100 / props.currentWorkshop.tc,
+            props.currentWorkshop.d * 100 / props.currentWorkshop.td,
+            props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr
+        ]
+    }])
+}
+
+var chart
+
 onMounted(() => {
-    var chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig)
+    chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig)
     chart.render()
+})
+
+watch(props, (o, n) => {
+    refresh()
 })
 </script>
 

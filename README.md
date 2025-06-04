@@ -1,7 +1,7 @@
 # suivi-prod
 
 This template should help get you started developing with Vue 3 in Vite.
-Place csv data files in /data with the following naming format: data_31-12-1979.csv (coma separator)
+Place csv data files in /data with the following naming format: data_1979-31-12.csv (year-month-day, coma separator format)
 
 ## Recommended IDE Setup
 

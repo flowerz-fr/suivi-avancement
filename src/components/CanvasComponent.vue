@@ -3,6 +3,7 @@ import { useWorkshopStore } from '@/stores/workshops'
 import { onMounted, ref } from 'vue'
 
 const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
+const store = useWorkshopStore()
 
 var objects = ref(null)
 var canvas
@@ -64,6 +65,7 @@ const onMouseDown = (event) => {
           object.isSelected = true
           emit("openDrawer")
           emit("selectWorkshop", object)
+          store.mountWorkshop(object)
         }
         else {
           object.isSelected = false
@@ -77,15 +79,6 @@ const onMouseDown = (event) => {
 const onMouseMove = (event) => {
   isMoving = true
   currentTransformedCursor = getTransformedPoint(event.offsetX, event.offsetY)
-  objects.value.forEach((object) => {
-    if (isObjectHovered(object, dragStartPosition)) {
-      document.body.style.cursor = "pointer"
-      console.log("oeee")
-    }
-    else {
-      document.body.style.cursor = "move"
-    }
-  })
   if (isMouseDown) {
     context.translate(
       currentTransformedCursor.x - dragStartPosition.x,
@@ -109,7 +102,6 @@ const onWheel = (event) => {
 }
 
 defineExpose({ resetObjectSelection })
-var store = useWorkshopStore()
 onMounted(() => {
   objects.value = store.workshops
   background.src = "/src/assets/images/plan.jpg"

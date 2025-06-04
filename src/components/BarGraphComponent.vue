@@ -2,6 +2,7 @@
 import { onMounted, watch } from 'vue'
 import ApexCharts from 'apexcharts'
 import Workshop from '@/stores/Workshop'
+import { useWorkshopStore } from '@/stores/workshops'
 
 const props = defineProps({
     currentWorkshop: {
@@ -10,24 +11,30 @@ const props = defineProps({
     }
 })
 
+const store = useWorkshopStore()
+
 const chartConfig = {
     series: [
         {
-            name: "Complétion",
+            name: "Précédente mise à jour",
             data: [
-                props.currentWorkshop.a * 100 / props.currentWorkshop.ta + "% (" + props.currentWorkshop.a + "/" + props.currentWorkshop.ta + ")",
-                props.currentWorkshop.c * 100 / props.currentWorkshop.tc + "% (" + props.currentWorkshop.c + "/" + props.currentWorkshop.tc + ")",
-                props.currentWorkshop.d * 100 / props.currentWorkshop.td + "% (" + props.currentWorkshop.d + "/" + props.currentWorkshop.td + ")",
-                props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr + "% (" + props.currentWorkshop.dr + "/" + props.currentWorkshop.tdr + ")"
+                props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10,
+                props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10,
+                props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10,
+                props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10
             ],
-        },
+        }
     ],
     chart: {
         type: "bar",
-        height: 240,
+        height: 300,
         toolbar: {
             show: false,
         },
+        stacked: true,
+        zoom: {
+            enabled: true
+        }
     },
     title: {
         show: "",
@@ -35,11 +42,14 @@ const chartConfig = {
     dataLabels: {
         enabled: false,
     },
-    colors: ["#020617"],
+    legend: {
+        fontFamily: 'inherit'
+    },
+    colors: ["#020617", "#039855"],
     plotOptions: {
         bar: {
             columnWidth: "40%",
-            borderRadius: 2,
+            borderRadius: 2
         },
     },
     xaxis: {
@@ -97,7 +107,10 @@ const chartConfig = {
     tooltip: {
         theme: "light",
         custom: (series, seriesIndex, dataPointIndex, w) => {
-            return "<span class=\"px-1\">" + series.series[0][series.dataPointIndex] + "%</span>"
+            var properties = Object.values(props.currentWorkshop)
+            var value = properties[4 + 2 * series.dataPointIndex] // indicators start at [4] and there is the total of each indicator after each one
+            var total = properties[5 + 2 * series.dataPointIndex]
+            return "<span class=\"px-1\">" + Math.round(value * 100 / total) + "%</span>"
         }
     },
 }
@@ -107,14 +120,25 @@ const formatToPercent = (value) => {
 }
 
 const refresh = () => {
-    chart.updateSeries([{
+    chart.updateSeries([
+        {
+            data: [
+                formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10),
+                formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10),
+                formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10),
+                formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10)
+            ]
+        }
+    ])
+    chart.appendSeries({
+        name: "Dernière mise à jour",
         data: [
-            formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta),
-            formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc),
-            formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td),
-            formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr)
+            formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10)),
+            formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10)),
+            formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10)),
+            formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10))
         ]
-    }])
+    })
 }
 
 var chart
@@ -126,6 +150,10 @@ onMounted(() => {
 
 watch(props, (o, n) => {
     refresh()
+    console.log("current")
+    console.log(store.currentWorkshop)
+    console.log("old")
+    console.log(store.currentOldWorkshop)
 })
 </script>
 

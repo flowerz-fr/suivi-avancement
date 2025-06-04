@@ -3,7 +3,10 @@ import InformationDrawerComponent from "./InformationDrawerComponent.vue"
 import BottomFloatingComponent from "./BottomFloatingComponent.vue"
 import TopFloatingComponent from "./TopFloatingComponent.vue"
 import DataCardComponent from "./DataCardComponent.vue"
+import { useWorkshopStore } from "@/stores/workshops"
+import { computed } from "vue"
 
+const store = useWorkshopStore()
 const props = defineProps({
     isDrawerOpen: {
         type: Boolean,
@@ -16,6 +19,46 @@ const emit = defineEmits(["closeDrawer"])
 const closeDrawer = () => {
     emit("closeDrawer")
 }
+
+const displayAValue = computed(() => {
+    return store.getCompletionA().current + '/' + store.getTotalA().current
+})
+
+const displayCValue = computed(() => {
+    return store.getCompletionC().current + '/' + store.getTotalC().current
+})
+
+const displayDValue = computed(() => {
+    return store.getCompletionD().current + '/' + store.getTotalD().current
+})
+
+const displayDrValue = computed(() => {
+    return store.getCompletionDr().current + '/' + store.getTotalDr().current
+})
+
+const displayAEvolution = computed(() => {
+    var currentState = store.getCompletionA().current * 100 / store.getTotalA().current
+    var oldState = store.getCompletionA().old * 100 / store.getTotalA().old
+    return (currentState > oldState ? "+" : "") + Math.round(currentState - oldState) + "%"
+})
+
+const displayCEvolution = computed(() => {
+    var currentState = store.getCompletionC().current * 100 / store.getTotalC().current
+    var oldState = store.getCompletionC().old * 100 / store.getTotalC().old
+    return (currentState > oldState ? "+" : "") + Math.round(currentState - oldState) + "%"
+})
+
+const displayDEvolution = computed(() => {
+    var currentState = store.getCompletionD().current * 100 / store.getTotalD().current
+    var oldState = store.getCompletionD().old * 100 / store.getTotalD().old
+    return (currentState > oldState ? "+" : "") + Math.round(currentState - oldState) + "%"
+})
+
+const displayDrEvolution = computed(() => {
+    var currentState = store.getCompletionDr().current * 100 / store.getTotalDr().current
+    var oldState = store.getCompletionDr().old * 100 / store.getTotalDr().old
+    return (currentState > oldState ? "+" : "") + Math.round(currentState - oldState) + "%"
+})
 </script>
 
 <template>
@@ -33,12 +76,12 @@ const closeDrawer = () => {
             <h1 class="w-screen text-center">Suivi d'avancement</h1>
         </TopFloatingComponent>
         <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
-            <DataCardComponent :title="'Caractérisation'" :value="'10/23'" :evolution="'+10%'" />
-            <DataCardComponent :title="'Assainissement'" :value="'10/23'" :evolution="'+10%'" />
+            <DataCardComponent :title="'Caractérisation'" :value="displayCValue" :evolution="displayCEvolution" />
+            <DataCardComponent :title="'Assainissement'" :value="displayAValue" :evolution="displayAEvolution" />
         </TopFloatingComponent>
         <BottomFloatingComponent :is-drawer-open="props.isDrawerOpen">
-            <DataCardComponent :title="'Démentèlement'" :value="'10/23'" :evolution="'+10%'" />
-            <DataCardComponent :title="'Démentèlement radiologique'" :value="'10/23'" :evolution="'+10%'" />
+            <DataCardComponent :title="'Démentèlement'" :value="displayDValue" :evolution="displayDEvolution" />
+            <DataCardComponent :title="'Démentèlement radiologique'" :value="displayDrValue" :evolution="displayDrEvolution" />
         </BottomFloatingComponent>
     </div>
 </template>

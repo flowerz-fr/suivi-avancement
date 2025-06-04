@@ -32,7 +32,7 @@ fetch("/data/actuel.csv")
     rows.shift()
     rows.forEach(row => {
       const columns = row.split(",")
-      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, 0.25, 0.25, "hade"))
+      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, 0.25, 0.25, "hade"))
       i++
     })
   })
@@ -44,7 +44,7 @@ fetch("/data/ancien.csv")
     rows.shift()
     rows.forEach(row => {
       const columns = row.split(",")
-      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, 0.25, 0.25, "hade"))
+      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, 0.25, 0.25, "hade"))
       i++
     })
   })

@@ -89,7 +89,8 @@ const onMouseMove = (event) => {
 
 const onMouseUp = () => {
   isMouseDown = false
-  document.getElementById("start-screen").remove()
+  if(document.getElementById("start-screen"))
+    document.getElementById("start-screen").remove()
 }
 
 const onWheel = (event) => {

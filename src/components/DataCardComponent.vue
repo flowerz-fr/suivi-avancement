@@ -1,5 +1,5 @@
 <script setup>
-import EvolutionIndicatorComponent from './EvolutionIndicatorComponent.vue';
+import EvolutionIndicatorComponent from './EvolutionIndicatorComponent.vue'
 
 const props = defineProps({
     title: {
@@ -27,7 +27,7 @@ const props = defineProps({
                 <span class="text-xs"
                     :class="props.evolution.charAt(0) == '+' ? 'text-success' : 'text-danger'">{{
                         props.evolution }}</span>
-                <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />
+                <EvolutionIndicatorComponent :has-changed="props.evolution.charAt(0) == '+'" :is-better="props.evolution.charAt(0) == '+'" />
             </div>
         </div>
     </div>

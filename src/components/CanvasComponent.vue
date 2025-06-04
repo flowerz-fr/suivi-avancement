@@ -89,6 +89,7 @@ const onMouseMove = (event) => {
 
 const onMouseUp = () => {
   isMouseDown = false
+  document.getElementById("start-screen").remove()
 }
 
 const onWheel = (event) => {
@@ -113,9 +114,6 @@ onMounted(() => {
   canvas.addEventListener("mousemove", onMouseMove)
   canvas.addEventListener("mouseup", onMouseUp)
   canvas.addEventListener("wheel", onWheel)
-  setTimeout(() => {
-    updateDisplay()
-  }, 1)
 })
 </script>
 

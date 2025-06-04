@@ -11,6 +11,9 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss(),
   ],
+  server: {
+    allowedHosts: ["5173-eptesicusde-suiviavance-6gq3lp6k1w4.ws-eu120.gitpod.io"]
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

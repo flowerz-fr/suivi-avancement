@@ -3,15 +3,10 @@ import InformationDrawerComponent from "./InformationDrawerComponent.vue"
 import BottomFloatingComponent from "./BottomFloatingComponent.vue"
 import TopFloatingComponent from "./TopFloatingComponent.vue"
 import DataCardComponent from "./DataCardComponent.vue"
-import Workshop from '@/stores/Workshop'
 
 const props = defineProps({
     isDrawerOpen: {
         type: Boolean,
-        required: true
-    },
-    currentWorkshop: {
-        type: Workshop,
         required: true
     }
 })
@@ -25,8 +20,7 @@ const closeDrawer = () => {
 
 <template>
     <div class="pointer-events-none">
-        <InformationDrawerComponent :is-drawer-open="props.isDrawerOpen" :current-workshop="props.currentWorkshop"
-            @close-drawer="closeDrawer" />
+        <InformationDrawerComponent :is-drawer-open="props.isDrawerOpen" @close-drawer="closeDrawer" />
         <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <h1 class="w-screen text-center">Suivi d'avancement</h1>
         </TopFloatingComponent>

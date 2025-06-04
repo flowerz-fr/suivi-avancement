@@ -1,36 +1,23 @@
 # suivi-prod
 
-This template should help get you started developing with Vue 3 in Vite.
-Place csv data files in /data with the following naming format: data_1979-31-12.csv (year-month-day, coma separator format)
+Placer les fichier contenant les données des ateliers dans le dossier /data.
+Ce dossier doit contenir seulement 2 fichiers: actuel.csv et ancien.csv
+A chaque mise à jour, supprimer le fichier ancien.csv, puis renommer le fichier restant en ancien.csv. Ajoutez enfin le fichier à jour et nommez-le actuel.csv.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Prépartation
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Développement
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compilation et empaquetage pour production
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

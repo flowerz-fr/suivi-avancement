@@ -24,8 +24,7 @@ const selectWorkshop = (workshop) => {
 
 <template>
   <main>
-    <CanvasComponent @open-drawer="openDrawer" @close-drawer="closeDrawer" @select-workshop="selectWorkshop"
-      ref="canvas" />
-    <UiComponent :is-drawer-open="isDrawerOpen" :current-workshop="currentWorkshop" @close-drawer="closeDrawer" />
+    <CanvasComponent @open-drawer="openDrawer" @close-drawer="closeDrawer" ref="canvas" />
+    <UiComponent :is-drawer-open="isDrawerOpen" @close-drawer="closeDrawer" />
   </main>
 </template>

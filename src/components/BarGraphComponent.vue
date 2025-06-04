@@ -4,13 +4,6 @@ import ApexCharts from 'apexcharts'
 import Workshop from '@/stores/Workshop'
 import { useWorkshopStore } from '@/stores/workshops'
 
-const props = defineProps({
-    currentWorkshop: {
-        type: Workshop,
-        required: true
-    }
-})
-
 const store = useWorkshopStore()
 
 const chartConfig = {
@@ -18,10 +11,10 @@ const chartConfig = {
         {
             name: "Précédente mise à jour",
             data: [
-                props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10,
-                props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10,
-                props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10,
-                props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10
+                store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta,
+                store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc,
+                store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td,
+                store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr
             ],
         }
     ],
@@ -107,7 +100,7 @@ const chartConfig = {
     tooltip: {
         theme: "light",
         custom: (series, seriesIndex, dataPointIndex, w) => {
-            var properties = Object.values(props.currentWorkshop)
+            var properties = Object.values(store.currentWorkshop)
             var value = properties[4 + 2 * series.dataPointIndex] // indicators start at [4] and there is the total of each indicator after each one
             var total = properties[5 + 2 * series.dataPointIndex]
             return "<span class=\"px-1\">" + Math.round(value * 100 / total) + "%</span>"
@@ -123,20 +116,20 @@ const refresh = () => {
     chart.updateSeries([
         {
             data: [
-                formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10),
-                formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10),
-                formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10),
-                formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10)
+                formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta),
+                formatToPercent(store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc),
+                formatToPercent(store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td),
+                formatToPercent(store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr)
             ]
         }
     ])
     chart.appendSeries({
         name: "Dernière mise à jour",
         data: [
-            formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - formatToPercent(props.currentWorkshop.a * 100 / props.currentWorkshop.ta - 10)),
-            formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - formatToPercent(props.currentWorkshop.c * 100 / props.currentWorkshop.tc - 10)),
-            formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - formatToPercent(props.currentWorkshop.d * 100 / props.currentWorkshop.td - 10)),
-            formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - formatToPercent(props.currentWorkshop.dr * 100 / props.currentWorkshop.tdr - 10))
+            formatToPercent(store.currentWorkshop.a * 100 / store.currentWorkshop.ta - formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta)),
+            formatToPercent(store.currentWorkshop.c * 100 / store.currentWorkshop.tc - formatToPercent(store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc)),
+            formatToPercent(store.currentWorkshop.d * 100 / store.currentWorkshop.td - formatToPercent(store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td)),
+            formatToPercent(store.currentWorkshop.dr * 100 / store.currentWorkshop.tdr - formatToPercent(store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr))
         ]
     })
 }
@@ -148,12 +141,8 @@ onMounted(() => {
     refresh()
 })
 
-watch(props, (o, n) => {
+watch(store, (o, n) => {
     refresh()
-    console.log("current")
-    console.log(store.currentWorkshop)
-    console.log("old")
-    console.log(store.currentOldWorkshop)
 })
 </script>
 

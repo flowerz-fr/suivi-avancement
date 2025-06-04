@@ -2,7 +2,7 @@
 import { useWorkshopStore } from '@/stores/workshops'
 import { onMounted, ref } from 'vue'
 
-const emit = defineEmits(["openDrawer", "closeDrawer", "selectWorkshop"])
+const emit = defineEmits(["openDrawer", "closeDrawer"])
 const store = useWorkshopStore()
 
 var objects = ref(null)
@@ -64,7 +64,6 @@ const onMouseDown = (event) => {
         if (isObjectHovered(object, dragStartPosition)) {
           object.isSelected = true
           emit("openDrawer")
-          emit("selectWorkshop", object)
           store.mountWorkshop(object)
         }
         else {

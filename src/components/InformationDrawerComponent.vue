@@ -2,8 +2,8 @@
 import EvolutionIndicatorComponent from './EvolutionIndicatorComponent.vue'
 import CloseButtonComponent from './CloseButtonComponent.vue'
 import BarGraphComponent from './BarGraphComponent.vue'
-import Workshop from '@/stores/Workshop'
 import { useWorkshopStore } from '@/stores/workshops'
+import { computed } from 'vue'
 
 const props = defineProps({
     isDrawerOpen: {
@@ -19,54 +19,96 @@ const emit = defineEmits(["closeDrawer"])
 const onCloseButtonClicked = () => {
     emit("closeDrawer")
 }
+
+const percentageA = computed(() => {
+    var evolution = Math.round(store.currentWorkshop.a * 100 / store.currentWorkshop.ta)
+    return (evolution > 0 ? "+" : "") + evolution + "%"
+})
+
+const percentageC = computed(() => {
+    var evolution = Math.round(store.currentWorkshop.c * 100 / store.currentWorkshop.tc)
+    return (evolution > 0 ? "+" : "") + evolution + "%"
+})
+
+const percentageD = computed(() => {
+    var evolution = Math.round(store.currentWorkshop.d * 100 / store.currentWorkshop.td)
+    return (evolution > 0 ? "+" : "") + evolution + "%"
+})
+
+const percentageDr = computed(() => {
+    var evolution = Math.round(store.currentWorkshop.dr * 100 / store.currentWorkshop.tdr)
+    return (evolution > 0 ? "+" : "") + evolution + "%"
+})
 </script>
 
 <template>
     <Transition>
         <div v-if="props.isDrawerOpen"
-            class="absolute top-0 left-0 h-screen bg-white w-1/5 shadow-md pointer-events-auto">
-            <img :src="'/src/assets/images/' + store.currentWorkshop.image + '.jpg'" class="w-full "
+            class="absolute top-0 left-0 h-screen bg-white w-1/5 shadow-md pointer-events-auto border-r border-r-zinc-300 overflow-y-scroll">
+            <img :src="'/src/assets/images/' + store.currentWorkshop.image + '.jpg'" class="w-full"
                 :alt="store.currentWorkshop.image">
-            <div class="px-8 pt-4 border-r border-r-zinc-300 w-full">
+            <div class="px-8 pt-4 w-full">
                 <CloseButtonComponent @action="onCloseButtonClicked" />
-                <h1>Informations</h1>
-                <p class="text-xs">Fin de chantier le {{ store.currentWorkshop.end }}</p>
+                <h1 class="heading">{{ store.currentWorkshop.workshop }}</h1>
+                <h1>INB {{ store.currentWorkshop.inb }}, projet de {{ store.currentWorkshop.project }}</h1>
+                <p class="text-xs">Fin de DEM en {{ store.currentWorkshop.end }}</p>
                 <div class="my-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100">
                         <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                             <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
-                                <EvolutionIndicatorComponent :has-changed="true" :is-better="false" />
+                                <div class="flex">
+                                    <span class="text-xs"
+                                        :class="store.currentWorkshop.a > store.currentOldWorkshop.a ? 'text-success' : 'text-danger'">{{ percentageA }}</span>
+                                    <EvolutionIndicatorComponent :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a" :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
+                                </div>
                             </dd>
                         </div>
                         <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                             <dt class="text-sm/6 sm:col-span-2 font-semibold">Caractérisation</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ store.currentWorkshop.c }}/{{ store.currentWorkshop.tc }}</h6>
-                                <EvolutionIndicatorComponent :has-changed="false" :is-better="true" />
+                                <div class="flex">
+                                    <span class="text-xs"
+                                        :class="store.currentWorkshop.c > store.currentOldWorkshop.c ? 'text-success' : 'text-danger'">{{ percentageC }}</span>
+                                    <EvolutionIndicatorComponent :has-changed="store.currentWorkshop.c > store.currentOldWorkshop.c" :is-better="store.currentWorkshop.c > store.currentOldWorkshop.c" />
+                                </div>
                             </dd>
                         </div>
                         <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                             <dt class="text-sm/6 sm:col-span-2 font-semibold">Démentèlement</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ store.currentWorkshop.d }}/{{ store.currentWorkshop.td }}</h6>
-                                <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />
+                                <div class="flex">
+                                    <span class="text-xs"
+                                        :class="store.currentWorkshop.d > store.currentOldWorkshop.d ? 'text-success' : 'text-danger'">{{ percentageD }}</span>
+                                    <EvolutionIndicatorComponent :has-changed="store.currentWorkshop.d > store.currentOldWorkshop.d" :is-better="store.currentWorkshop.d > store.currentOldWorkshop.d" />
+                                </div>
                             </dd>
                         </div>
                         <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                             <dt class="text-sm/6 sm:col-span-2 font-semibold">Déclassement radiologique</dt>
                             <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                 <h6 class="grow">{{ store.currentWorkshop.dr }}/{{ store.currentWorkshop.tdr }}</h6>
-                                <EvolutionIndicatorComponent :has-changed="true" :is-better="true" />
+                                <div class="flex">
+                                    <span class="text-xs"
+                                        :class="store.currentWorkshop.dr > store.currentOldWorkshop.dr ? 'text-success' : 'text-danger'">{{ percentageDr }}</span>
+                                    <EvolutionIndicatorComponent :has-changed="store.currentWorkshop.dr > store.currentOldWorkshop.dr" :is-better="store.currentWorkshop.dr > store.currentOldWorkshop.dr" />
+                                </div>
                             </dd>
                         </div>
                     </dl>
                 </div>
-                <h1>Avancement</h1>
+                <h1 class="pt-4">Avancement</h1>
             </div>
             <div class="px-3">
                 <BarGraphComponent />
+            </div>
+            <div class="px-8 mb-6 py-4 w-full">
+                <h1>Évolution sur la période</h1>
+                <p class="text-xs mb-4">Mise à jour le {{ store.currentWorkshop.updateDate }}</p>
+                <span class="text-sm text-zinc-700">{{ store.currentWorkshop.updateContent }}</span>
             </div>
         </div>
     </Transition>

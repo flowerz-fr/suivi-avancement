@@ -31,7 +31,7 @@ const onCloseButtonClicked = () => {
             <div class="px-8 pt-4 border-r border-r-zinc-300 w-full">
                 <CloseButtonComponent @action="onCloseButtonClicked" />
                 <h1>Informations</h1>
-                <p class="text-xs">Fin de chantier le {{ props.currentWorkshop.date }}</p>
+                <p class="text-xs">Fin de chantier le {{ props.currentWorkshop.end }}</p>
                 <div class="my-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100">
                         <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">

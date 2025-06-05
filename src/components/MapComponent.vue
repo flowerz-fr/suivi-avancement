@@ -45,19 +45,27 @@ const geojson = {
     ]
 }
 
+const onMouseDown = () => {}
+
+const onMouseMove = () => {}
+
+const onMouseUp = () => {}
+
+const onWheel = () => {}
+
 var map
 
 onMounted(() => {
+    const switchButton = document.getElementById("switch-perspective")
     map = new maplibregl.Map({
         container: 'map',
-        maxZoom: 20,
-        minZoom: 15,
+        zoom: 15,
+        maxZoom: 19, // close
+        minZoom: 15, // far
         style:
             `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_KEY}`,
-        center: [-1.881001, 49.678638], // lon, lat
-        zoom: 15,
-        pitch: 45,
-        bounds: [[-1.881001, 49.678638], [-1.881001, 49.678638]]
+        center: [-1.878, 49.678638], // lon, lat
+        pitch: 55
     })
     /*store.workshops.forEach((workshop) => {
         // create a DOM element for the marker
@@ -79,6 +87,11 @@ onMounted(() => {
             .addTo(map)
     })*/
     map.on('load', () => {
+        switchButton.addEventListener("mouseup", () => {
+            var pitch = map.transform.pitch
+            pitch == 0 ? map.setPitch(55) : map.setPitch(0)
+            switchButton.innerHTML = pitch == 0 ? "2D" : "3D" 
+        })
         const layers = map.getStyle().layers
         let labelLayerId;
         for (let i = 0; i < layers.length; i++) {
@@ -105,7 +118,7 @@ onMounted(() => {
                         'interpolate',
                         ['linear'],
                         ['zoom'],
-                        15,
+                        10,
                         0,
                         16,
                         ['get', 'render_height']
@@ -118,6 +131,11 @@ onMounted(() => {
             },
             labelLayerId
         )
+        const mapEl = document.getElementsByClassName("maplibregl-canvas")[0]
+        mapEl.addEventListener("mousedown", onMouseDown)
+        mapEl.addEventListener("mousemove", onMouseMove)
+        mapEl.addEventListener("mouseup", onMouseUp)
+        mapEl.addEventListener("wheel", onWheel)
     })
 })
 </script>

@@ -39,6 +39,10 @@ p {
   color: oklch(55.2% 0.016 285.938);
 }
 
+#map {
+  height: 100vh;
+}
+
 .text-success {
   color: #039855;
 }

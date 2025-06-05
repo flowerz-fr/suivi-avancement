@@ -2,6 +2,7 @@
 import { ref } from "vue"
 import CanvasComponent from '../components/CanvasComponent.vue'
 import UiComponent from '../components/UiComponent.vue'
+import MapComponent from "@/components/MapComponent.vue"
 
 const isDrawerOpen = ref(false)
 const canvas = ref(null)
@@ -24,7 +25,7 @@ const selectWorkshop = (workshop) => {
 
 <template>
   <main>
-    <CanvasComponent @open-drawer="openDrawer" @close-drawer="closeDrawer" ref="canvas" />
+    <MapComponent />
     <UiComponent :is-drawer-open="isDrawerOpen" @close-drawer="closeDrawer" />
   </main>
 </template>

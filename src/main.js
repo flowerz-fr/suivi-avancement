@@ -15,12 +15,12 @@ app.use(router)
 
 const workshopCoordinates = [
   {
-    x: 500,
-    y: 500
+    x: -1.881001,
+    y: 49.678638
   },
   {
-    x: 400,
-    y: 500
+    x: -1.881002,
+    y: 49.678639
   }
 ]
 

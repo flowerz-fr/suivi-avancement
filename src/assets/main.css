@@ -49,3 +49,12 @@ p {
 .text-danger {
   color: #D92D20;
 }
+
+.marker {
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-size: cover; /* Scales the image to cover the entire element */
+  background-position: center;
+}

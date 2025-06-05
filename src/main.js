@@ -15,22 +15,22 @@ app.use(router)
 
 const workshopCoordinates = [
   { // MAU
-    x: 1133,
-    y: 260,
+    x: 0, // -1.878
+    y: 0, // 49.678638
     scalex: 0.17,
     scaley: 0.2,
     image: "mau"
   },
   { // MAPu
-    x: 1080,
-    y: 260,
+    x: -1.8832, // -1.878
+    y: 49.6795, // 49.678638
     scalex: 0.17,
     scaley: 0.2,
     image: "mapu"
   },
   { // HADE
-    x: 1330,
-    y: 260,
+    x: -1.8802, // + goes left
+    y: 49.67875, // + goes up
     scalex: 0.25,
     scaley: 0.25,
     image: "hade"

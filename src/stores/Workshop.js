@@ -15,14 +15,12 @@ export default class Workshop {
         this.updateDate = updateDate
         this.updateContent = updateContent
         this.image = image
-        this.width = 302 * scalex
-        this.height = 302 * scaley
-        this.x = x - this.width / 2
-        this.y = y - this.height / 2
+        this.x = x
+        this.y = y
         this.isSelected = false
     }
 
     getGlobalCoordinates() {
-        return { x: this.x + this.width / 2, y: this.y + this.height / 2 }
+        return { x: this.x, y: this.y }
     }
 }

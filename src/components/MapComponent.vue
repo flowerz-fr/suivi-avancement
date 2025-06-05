@@ -6,50 +6,22 @@ const emit = defineEmits(["openDrawer", "closeDrawer"])
 const store = useWorkshopStore()
 const MAPTILER_KEY = "EDqsUDjya9TWEYog9EpZ"
 
-const geojson = {
-    'type': 'FeatureCollection',
-    'features': [
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Foo',
-                'iconSize': [60, 60]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-66.324462890625, -16.024695711685304]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Bar',
-                'iconSize': [50, 50]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-61.2158203125, -15.97189158092897]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Baz',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-63.29223632812499, -18.28151823530889]
-            }
-        }
-    ]
+var isDragging = false
+
+const onMouseDown = () => {
+    isDragging = false
 }
 
-const onMouseDown = () => {}
+const onMouseMove = () => {
+    isDragging = true
+}
 
-const onMouseMove = () => {}
-
-const onMouseUp = () => {}
+const onMouseUp = () => {
+    setTimeout(() => {
+        if(!isDragging)
+            emit("closeDrawer")
+    }, 10)
+}
 
 const onWheel = () => {}
 
@@ -67,25 +39,6 @@ onMounted(() => {
         center: [-1.878, 49.678638], // lon, lat
         pitch: 55
     })
-    /*store.workshops.forEach((workshop) => {
-        // create a DOM element for the marker
-        const el = document.createElement('div')
-        el.className = 'marker'
-        el.style.backgroundImage =
-            `url(/src/assets/images/${workshop.image}.jpg)`
-        el.style.width = "50px"
-        el.style.height = "50px"
-
-        el.addEventListener('click', () => {
-            emit("openDrawer")
-            store.mountWorkshop(workshop)
-        })
-
-        // add marker to map
-        new maplibregl.Marker({ element: el })
-            .setLngLat([-1.881001, 49.678638])
-            .addTo(map)
-    })*/
     map.on('load', () => {
         switchButton.addEventListener("mouseup", () => {
             var pitch = map.transform.pitch
@@ -131,6 +84,20 @@ onMounted(() => {
             },
             labelLayerId
         )
+        store.workshops.forEach((workshop) => {
+            const el = document.createElement('div')
+            el.className = 'marker'
+            el.style.backgroundImage =
+                `url(/src/assets/images/${workshop.image}.jpg)`
+
+            el.addEventListener('click', () => {
+                emit("openDrawer")
+                store.mountWorkshop(workshop)
+            })
+            new maplibregl.Marker({ element: el })
+                .setLngLat([workshop.x, workshop.y])
+                .addTo(map)
+        })
         const mapEl = document.getElementsByClassName("maplibregl-canvas")[0]
         mapEl.addEventListener("mousedown", onMouseDown)
         mapEl.addEventListener("mousemove", onMouseMove)

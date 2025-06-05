@@ -9,7 +9,6 @@ const props = defineProps({
         required: false
     }
 })
-console.log(props.isBetter)
 </script>
 
 <template>

@@ -55,7 +55,6 @@ const onMouseDown = (event) => {
   isMouseDown = true
   isMoving = false // defaulting to false to compare if onMouseMove sets it to true in the meantime
   dragStartPosition = getTransformedPoint(event.offsetX, event.offsetY)
-  console.log(dragStartPosition)
   // waiting between the moment of click and .005s after to see if mouse has moved to see if click is dragged or not
   setTimeout(() => {
     if (!isMoving) {

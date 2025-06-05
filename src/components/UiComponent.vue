@@ -5,6 +5,7 @@ import TopFloatingComponent from "./TopFloatingComponent.vue"
 import DataCardComponent from "./DataCardComponent.vue"
 import { useWorkshopStore } from "@/stores/workshops"
 import { computed } from "vue"
+import RightFloatingComponent from "./RightFloatingComponent.vue"
 
 const store = useWorkshopStore()
 const props = defineProps({
@@ -65,23 +66,24 @@ const displayDrEvolution = computed(() => {
     <div class="pointer-events-none">
         <div id="start-screen" class="absolute top-0 bg-white w-screen h-screen grid place-content-center z-10">
             <div class="flex w-fit">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 my-auto">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6 my-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
                 </svg>
                 <h2 class="my-auto ml-2">Cliquez pour commencer</h2>
             </div>
         </div>
         <InformationDrawerComponent :is-drawer-open="props.isDrawerOpen" @close-drawer="closeDrawer" />
         <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
-            <h1 class="w-screen text-center">Suivi d'avancement</h1>
+            <h1 class="w-screen text-center mt-2">Suivi d'avancement DEM et RCD UP2-400</h1>
         </TopFloatingComponent>
-        <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
+        <RightFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <DataCardComponent :title="'Caractérisation'" :value="displayCValue" :evolution="displayCEvolution" />
             <DataCardComponent :title="'Assainissement'" :value="displayAValue" :evolution="displayAEvolution" />
-        </TopFloatingComponent>
-        <BottomFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <DataCardComponent :title="'Démentèlement'" :value="displayDValue" :evolution="displayDEvolution" />
-            <DataCardComponent :title="'Démentèlement radiologique'" :value="displayDrValue" :evolution="displayDrEvolution" />
-        </BottomFloatingComponent>
+            <DataCardComponent :title="'Déclassement radiologique'" :value="displayDrValue"
+                :evolution="displayDrEvolution" />
+        </RightFloatingComponent>
     </div>
 </template>

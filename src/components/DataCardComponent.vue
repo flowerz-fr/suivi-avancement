@@ -22,11 +22,9 @@ const props = defineProps({
         <h3>{{ props.title }}</h3>
         <h2>{{ props.value }}</h2>
         <div class="flex items-center">
-            <p class="grow text-xs">Évolution</p>
+            <p class="grow text-xs">Avancement</p>
             <div class="flex">
-                <span class="text-xs"
-                    :class="props.evolution.charAt(0) == '+' ? 'text-success' : 'text-danger'">{{
-                        props.evolution }}</span>
+                <span class="text-sm text-blue-600">{{ props.evolution }}</span>
                 <EvolutionIndicatorComponent :has-changed="props.evolution.charAt(0) == '+'" :is-better="props.evolution.charAt(0) == '+'" />
             </div>
         </div>

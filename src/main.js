@@ -14,14 +14,18 @@ app.use(createPinia())
 app.use(router)
 
 const workshopCoordinates = [
-  {
+  { // MAU
     x: 500,
     y: 500
   },
-  {
+  { // MAPu
     x: 400,
     y: 500
-  }
+  },
+  { // HADE
+    x: 300,
+    y: 200
+  },
 ]
 
 fetch("/data/actuel.csv")

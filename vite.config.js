@@ -12,7 +12,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    allowedHosts: ["5173-eptesicusde-suiviavance-lj8hgky333s.ws-eu120.gitpod.io"]
+    allowedHosts: ["5173-eptesicusde-suiviavance-6gq3lp6k1w4.ws-eu120.gitpod.io"]
   },
   resolve: {
     alias: {

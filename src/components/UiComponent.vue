@@ -5,6 +5,7 @@ import TopFloatingComponent from "./TopFloatingComponent.vue"
 import DataCardComponent from "./DataCardComponent.vue"
 import { useWorkshopStore } from "@/stores/workshops"
 import { computed } from "vue"
+import RightFloatingComponent from "./RightFloatingComponent.vue"
 
 const store = useWorkshopStore()
 const props = defineProps({
@@ -67,13 +68,12 @@ const displayDrEvolution = computed(() => {
         <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <h1 class="w-screen text-center mt-4">Suivi d'avancement DEM et RCD UP2-400</h1>
         </TopFloatingComponent>
-        <TopFloatingComponent :is-drawer-open="props.isDrawerOpen">
+        <RightFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <DataCardComponent :title="'Caractérisation'" :value="displayCValue" :evolution="displayCEvolution" />
             <DataCardComponent :title="'Assainissement'" :value="displayAValue" :evolution="displayAEvolution" />
-        </TopFloatingComponent>
-        <BottomFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <DataCardComponent :title="'Démentèlement'" :value="displayDValue" :evolution="displayDEvolution" />
-            <DataCardComponent :title="'Démentèlement radiologique'" :value="displayDrValue" :evolution="displayDrEvolution" />
-        </BottomFloatingComponent>
+            <DataCardComponent :title="'Déclassement radiologique'" :value="displayDrValue"
+                :evolution="displayDrEvolution" />
+        </RightFloatingComponent>
     </div>
 </template>

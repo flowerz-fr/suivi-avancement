@@ -33,12 +33,12 @@ const chartConfig = {
         show: "",
     },
     dataLabels: {
-        enabled: false,
+        enabled: true,
     },
     legend: {
         fontFamily: 'inherit'
     },
-    colors: ["#020617", "#039855"],
+    colors: ["#020617", "oklch(54.6% 0.245 262.881)"],
     plotOptions: {
         bar: {
             columnWidth: "40%",

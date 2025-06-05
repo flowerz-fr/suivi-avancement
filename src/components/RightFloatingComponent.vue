@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
     <Transition>
-        <div v-show="!props.isDrawerOpen" class="absolute right-0 flex flex-column">
+        <div v-show="!props.isDrawerOpen" class="absolute top-0 right-0 flex flex-col">
             <slot></slot>
         </div>
     </Transition>
@@ -23,6 +23,6 @@ const props = defineProps({
 
 .v-enter-from,
 .v-leave-to {
-    right: 120vw;
+    right: -20vw;
 }
 </style>

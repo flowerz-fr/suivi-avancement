@@ -21,22 +21,22 @@ const onCloseButtonClicked = () => {
 }
 
 const percentageA = computed(() => {
-    var evolution = Math.round(store.currentWorkshop.a * 100 / store.currentWorkshop.ta)
+    var evolution = Math.round(store.currentWorkshop.a * 100 / store.currentWorkshop.ta - store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta)
     return (evolution > 0 ? "+" : "") + evolution + "%"
 })
 
 const percentageC = computed(() => {
-    var evolution = Math.round(store.currentWorkshop.c * 100 / store.currentWorkshop.tc)
+    var evolution = Math.round(store.currentWorkshop.c * 100 / store.currentWorkshop.tc - store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc)
     return (evolution > 0 ? "+" : "") + evolution + "%"
 })
 
 const percentageD = computed(() => {
-    var evolution = Math.round(store.currentWorkshop.d * 100 / store.currentWorkshop.td)
+    var evolution = Math.round(store.currentWorkshop.d * 100 / store.currentWorkshop.td - store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td)
     return (evolution > 0 ? "+" : "") + evolution + "%"
 })
 
 const percentageDr = computed(() => {
-    var evolution = Math.round(store.currentWorkshop.dr * 100 / store.currentWorkshop.tdr)
+    var evolution = Math.round(store.currentWorkshop.dr * 100 / store.currentWorkshop.tdr - store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr)
     return (evolution > 0 ? "+" : "") + evolution + "%"
 })
 </script>

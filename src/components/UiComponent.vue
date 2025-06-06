@@ -82,5 +82,10 @@ const displayDrEvolution = computed(() => {
         <div id="switch-perspective" class="absolute bottom-0 right-0 mb-10 mr-2 bg-white pointer-events-auto cursor-pointer p-2 shadow-md rounded-xl border border-zinc-300 text-sm font-semibold">
             2D
         </div>
+        <BottomFloatingComponent :is-drawer-open="props.isDrawerOpen">
+            <div class="w-screen grid place-content-center">
+                <img class="w-40 mb-4" src="/src/assets/logo.jpeg" alt="">
+            </div>
+        </BottomFloatingComponent>
     </div>
 </template>

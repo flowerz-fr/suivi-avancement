@@ -1,5 +1,5 @@
 export default class Workshop {
-    constructor(workshop, inb, projet, end, a, ta, c, tc, d, td, dr, tdr, updateDate, updateContent, x, y, scalex, scaley, image) {
+    constructor(workshop, inb, projet, end, a, ta, c, tc, d, td, dr, tdr, updateDate, updateContent, x, y, image, color) {
         this.workshop = workshop
         this.inb = inb
         this.project = projet
@@ -18,6 +18,7 @@ export default class Workshop {
         this.x = x
         this.y = y
         this.isSelected = false
+        this.color = color
     }
 
     getGlobalCoordinates() {

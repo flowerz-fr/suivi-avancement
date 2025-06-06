@@ -13,27 +13,31 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
+// because data such as image name or coordinates are not included inside csv input files and are constant through time so they are hardcoded here
 const workshopCoordinates = [
   { // MAU
-    x: 0, // -1.878
-    y: 0, // 49.678638
+    x: -1.8832,
+    y: 49.6796,
     scalex: 0.17,
     scaley: 0.2,
-    image: "mau"
+    image: "mau",
+    color: "green"
   },
   { // MAPu
-    x: -1.8832, // -1.878
-    y: 49.6795, // 49.678638
+    x: -1.8838,
+    y: 49.67965,
     scalex: 0.17,
     scaley: 0.2,
-    image: "mapu"
+    image: "mapu",
+    color: "green"
   },
   { // HADE
     x: -1.8802, // + goes left
-    y: 49.67875, // + goes up
+    y: 49.6789, // + goes up
     scalex: 0.25,
     scaley: 0.25,
-    image: "hade"
+    image: "hade",
+    color: "green"
   },
 ]
 
@@ -45,7 +49,7 @@ fetch("/data/actuel.csv")
     rows.shift()
     rows.forEach(row => {
       const columns = row.split(",")
-      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].scalex, workshopCoordinates[i].scaley, workshopCoordinates[i].image))
+      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
       i++
     })
   })
@@ -57,7 +61,7 @@ fetch("/data/ancien.csv")
     rows.shift()
     rows.forEach(row => {
       const columns = row.split(",")
-      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].scalex, workshopCoordinates[i].scaley, workshopCoordinates[i].image))
+      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
       i++
     })
   })

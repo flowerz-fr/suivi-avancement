@@ -50,23 +50,46 @@ p {
   color: #D92D20;
 }
 
-.marker {
-  box-shadow: var(--shadow-md);
-  border-radius: 100%;
-  width: 80px;
-  height: 80px;
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-size: cover; /* Scales the image to cover the entire element */
-  background-position: center;
-  transition: width .3s ease, height .3s ease;
+.maplibregl-marker {
+  pointer-events: none;
 }
 
-.marker:hover {
-  width: 90px;
-  height: 90px;
-  cursor: pointer;
+.bg-blue {
+  background-color: #0700AF;
 }
 
-.selected {
-  border: solid 4px var(--color-amber-300);
+.bg-green {
+  background-color: #66A84C;
+}
+
+.bg-orange {
+  background-color: #DC8603;
+}
+
+.bg-red {
+  background-color: #C50204;
+}
+
+.bg-selected {
+  background-color: #ffd230;
+}
+
+.text-blue {
+  color: #0700AF;
+}
+
+.text-green {
+  color: #66A84C;
+}
+
+.text-orange {
+  color: #DC8603;
+}
+
+.text-red {
+  color: #C50204;
+}
+
+.text-selected {
+  color: #ffd230;
 }

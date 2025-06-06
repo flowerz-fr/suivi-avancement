@@ -11,8 +11,8 @@ const chartConfig = {
         {
             name: "Précédente mise à jour",
             data: [
-                store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta,
                 store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc,
+                store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta,
                 store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td,
                 store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr
             ],
@@ -61,8 +61,8 @@ const chartConfig = {
             },
         },
         categories: [
-            "Assainissement",
             "Caractérisation",
+            "Assainissement",
             "Démantèlement",
             "Déclassement radio",
         ],
@@ -116,8 +116,8 @@ const refresh = () => {
     chart.updateSeries([
         {
             data: [
-                formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta),
                 formatToPercent(store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc),
+                formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta),
                 formatToPercent(store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td),
                 formatToPercent(store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr)
             ]
@@ -126,8 +126,8 @@ const refresh = () => {
     chart.appendSeries({
         name: "Dernière mise à jour",
         data: [
-            formatToPercent(store.currentWorkshop.a * 100 / store.currentWorkshop.ta - formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta)),
             formatToPercent(store.currentWorkshop.c * 100 / store.currentWorkshop.tc - formatToPercent(store.currentOldWorkshop.c * 100 / store.currentOldWorkshop.tc)),
+            formatToPercent(store.currentWorkshop.a * 100 / store.currentWorkshop.ta - formatToPercent(store.currentOldWorkshop.a * 100 / store.currentOldWorkshop.ta)),
             formatToPercent(store.currentWorkshop.d * 100 / store.currentWorkshop.td - formatToPercent(store.currentOldWorkshop.d * 100 / store.currentOldWorkshop.td)),
             formatToPercent(store.currentWorkshop.dr * 100 / store.currentWorkshop.tdr - formatToPercent(store.currentOldWorkshop.dr * 100 / store.currentOldWorkshop.tdr))
         ]

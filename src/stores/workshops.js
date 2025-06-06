@@ -16,6 +16,11 @@ export const useWorkshopStore = defineStore("workshops", () => {
     })
   }
 
+  function dismountWorkshop() {
+    currentWorkshop.value = null
+    currentOldWorkshop.value = null
+  }
+
   function addWorkshop(workshop) {
     workshops.value.push(workshop)
   }
@@ -28,10 +33,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.a)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.a)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.a)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.a)
     })
     return { current: sum, old: sumOld }
   }
@@ -40,10 +47,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.c)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.c)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.c)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.c)
     })
     return { current: sum, old: sumOld }
   }
@@ -52,10 +61,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.d)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.d)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.d)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.d)
     })
     return { current: sum, old: sumOld }
   }
@@ -64,10 +75,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.dr)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.dr)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.dr)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.dr)
     })
     return { current: sum, old: sumOld }
   }
@@ -76,10 +89,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.ta)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.ta)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.ta)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.ta)
     })
     return { current: sum, old: sumOld }
   }
@@ -88,10 +103,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.tc)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.tc)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.tc)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.tc)
     })
     return { current: sum, old: sumOld }
   }
@@ -100,10 +117,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.td)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.td)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.td)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.td)
     })
     return { current: sum, old: sumOld }
   }
@@ -112,10 +131,12 @@ export const useWorkshopStore = defineStore("workshops", () => {
     var sum = 0
     var sumOld = 0
     workshops.value.forEach((workshop) => {
-      sum += parseInt(workshop.tdr)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sum += parseInt(workshop.tdr)
     })
     oldWorkshops.value.forEach((workshop) => {
-      sumOld += parseInt(workshop.tdr)
+      if(currentWorkshop.value == null || workshop.inb == currentWorkshop.value.inb)
+        sumOld += parseInt(workshop.tdr)
     })
     return { current: sum, old: sumOld }
   }
@@ -126,6 +147,7 @@ export const useWorkshopStore = defineStore("workshops", () => {
     currentWorkshop,
     currentOldWorkshop,
     mountWorkshop,
+    dismountWorkshop,
     addWorkshop,
     addOldWorkshop,
     getCompletionA,

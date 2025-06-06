@@ -64,18 +64,6 @@ const percentageDr = computed(() => {
                     <div class="border-t border-gray-100">
                         <dl class="divide-y divide-gray-100">
                             <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
-                                <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
-                                    <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
-                                    <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageA }}</span>
-                                        <EvolutionIndicatorComponent
-                                            :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a"
-                                            :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
-                                    </div>
-                                </dd>
-                            </div>
-                            <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                 <dt class="text-sm/6 sm:col-span-2 font-semibold">Caractérisation</dt>
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.c }}/{{ store.currentWorkshop.tc }}</h6>
@@ -88,7 +76,19 @@ const percentageDr = computed(() => {
                                 </dd>
                             </div>
                             <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Démentèlement</dt>
+                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
+                                <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
+                                    <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
+                                    <div class="flex justify-end">
+                                        <span class="text-xs text-blue-600 font-bold">{{ percentageA }}</span>
+                                        <EvolutionIndicatorComponent
+                                            :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a"
+                                            :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
+                                    </div>
+                                </dd>
+                            </div>
+                            <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Démantèlement</dt>
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.d }}/{{ store.currentWorkshop.td }}</h6>
                                     <div class="flex">

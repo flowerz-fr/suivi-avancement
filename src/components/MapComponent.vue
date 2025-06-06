@@ -12,7 +12,7 @@ var markerElList = []
 
 const resetObjectSelection = () => {
     markerElList.forEach((markerEl) => {
-        markerEl.classList.remove("selected")
+        markerEl.children[0].classList.remove("bg-selected", "text-selected")
     })
 }
 
@@ -29,6 +29,7 @@ const onMouseUp = () => {
         if(!isDragging) {
             emit("closeDrawer")
             resetObjectSelection()
+            store.dismountWorkshop()
         }
     }, 10)
 }
@@ -61,10 +62,6 @@ onMounted(() => {
                 break
             }
         }
-        /*map.addSource('mysource', {
-            url: `https://api.maptiler.com/tiles/v3/tiles.json?key=${MAPTILER_KEY}`,
-            type: 'vector',
-        })*/
         map.addLayer(
             {
                 'id': '3d-buildings',
@@ -98,14 +95,17 @@ onMounted(() => {
         )
         store.workshops.forEach((workshop) => {
             const el = document.createElement('div')
-            el.className = 'marker'
-            el.style.backgroundImage =
-                `url(/src/assets/images/${workshop.image}.jpg)`
+            el.classList = `text-${workshop.color}`
+            el.innerHTML = `
+            <div class="px-2 py-1 rounded-lg text-white pointer-events-auto cursor-pointer shadow-lg bg-${!workshop.isSelected ? workshop.color : "selected"} text-${!workshop.isSelected ? workshop.color : "selected"}" style="transform: translate(0, -55%)">
+                <div class="font-sm font-bold marker-label text-white">${workshop.workshop}</div>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="absolute bottom-0 mt-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="transform: translate(-50%, 50%); left: 50%" aria-hidden="true"><path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+            </div>`
             el.addEventListener('click', () => {
                 resetObjectSelection()
                 emit("openDrawer")
                 store.mountWorkshop(workshop)
-                el.classList.add("selected")
+                el.children[0].classList.add("bg-selected", "text-selected")
             })
             markerElList.push(el)
             new maplibregl.Marker({ element: el })

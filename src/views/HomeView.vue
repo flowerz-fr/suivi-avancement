@@ -15,7 +15,7 @@ const openDrawer = () => {
 
 const closeDrawer = () => {
   isDrawerOpen.value = false
-  canvas.value.resetObjectSelection()
+  //canvas.value.resetObjectSelection()
 }
 
 const selectWorkshop = (workshop) => {

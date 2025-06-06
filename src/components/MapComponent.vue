@@ -7,6 +7,14 @@ const store = useWorkshopStore()
 const MAPTILER_KEY = "EDqsUDjya9TWEYog9EpZ"
 
 var isDragging = false
+var map
+var markerElList = []
+
+const resetObjectSelection = () => {
+    markerElList.forEach((markerEl) => {
+        markerEl.classList.remove("selected")
+    })
+}
 
 const onMouseDown = () => {
     isDragging = false
@@ -18,14 +26,14 @@ const onMouseMove = () => {
 
 const onMouseUp = () => {
     setTimeout(() => {
-        if(!isDragging)
+        if(!isDragging) {
             emit("closeDrawer")
+            resetObjectSelection()
+        }
     }, 10)
 }
 
 const onWheel = () => {}
-
-var map
 
 onMounted(() => {
     const switchButton = document.getElementById("switch-perspective")
@@ -53,13 +61,17 @@ onMounted(() => {
                 break
             }
         }
+        /*map.addSource('mysource', {
+            url: `https://api.maptiler.com/tiles/v3/tiles.json?key=${MAPTILER_KEY}`,
+            type: 'vector',
+        })*/
         map.addLayer(
             {
                 'id': '3d-buildings',
                 'source': 'openmaptiles',
                 'source-layer': 'building',
                 'type': 'fill-extrusion',
-                'minzoom': 15,
+                'minzoom': 14,
                 'filter': ['!=', ['get', 'hide_3d'], true],
                 'paint': {
                     'fill-extrusion-color': [
@@ -71,8 +83,8 @@ onMounted(() => {
                         'interpolate',
                         ['linear'],
                         ['zoom'],
-                        10,
-                        0,
+                        15,
+                        5,
                         16,
                         ['get', 'render_height']
                     ],
@@ -89,11 +101,13 @@ onMounted(() => {
             el.className = 'marker'
             el.style.backgroundImage =
                 `url(/src/assets/images/${workshop.image}.jpg)`
-
             el.addEventListener('click', () => {
+                resetObjectSelection()
                 emit("openDrawer")
                 store.mountWorkshop(workshop)
+                el.classList.add("selected")
             })
+            markerElList.push(el)
             new maplibregl.Marker({ element: el })
                 .setLngLat([workshop.x, workshop.y])
                 .addTo(map)

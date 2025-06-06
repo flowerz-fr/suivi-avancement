@@ -57,4 +57,15 @@ p {
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-size: cover; /* Scales the image to cover the entire element */
   background-position: center;
+  transition: width .3s ease, height .3s ease;
+}
+
+.marker:hover {
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+}
+
+.selected {
+  border: solid 4px var(--color-amber-300);
 }

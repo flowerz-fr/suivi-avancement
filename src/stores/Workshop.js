@@ -5,10 +5,10 @@ export default class Workshop {
         this.project = projet
         this.zone = zone
         this.end = end // fin de chantier
-        this.a = a // assainissement
-        this.ta = ta // total assainissement
         this.c = c // caracterisation
         this.tc = tc // total caracterisation
+        this.a = a // assainissement
+        this.ta = ta // total assainissement
         this.d = d // dementelement
         this.td = td // total dementelement
         this.dr = dr // declassement radiologique

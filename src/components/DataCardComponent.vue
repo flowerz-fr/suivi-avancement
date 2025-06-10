@@ -35,7 +35,7 @@ const inb = computed(() => {
         <div class="flex items-center">
             <p class="grow text-xs">Avancement</p>
             <div class="flex">
-                <span class="text-sm text-blue-600 font-bold">{{ props.evolution }}</span>
+                <span class="text-xs text-blue-600">{{ props.evolution }}</span>
                 <EvolutionIndicatorComponent :has-changed="props.evolution.includes('+')" />
             </div>
         </div>

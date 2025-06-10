@@ -71,7 +71,7 @@ const percentageDr = computed(() => {
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.c }}/{{ store.currentWorkshop.tc }}</h6>
                                     <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageC }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageC }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.c > store.currentOldWorkshop.c"
                                             :is-better="store.currentWorkshop.c > store.currentOldWorkshop.c" />
@@ -83,7 +83,7 @@ const percentageDr = computed(() => {
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
                                     <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageA }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageA }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a"
                                             :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
@@ -95,7 +95,7 @@ const percentageDr = computed(() => {
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.d }}/{{ store.currentWorkshop.td }}</h6>
                                     <div class="flex">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageD }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageD }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.d > store.currentOldWorkshop.d"
                                             :is-better="store.currentWorkshop.d > store.currentOldWorkshop.d" />
@@ -107,7 +107,7 @@ const percentageDr = computed(() => {
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.dr }}/{{ store.currentWorkshop.tdr }}</h6>
                                     <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageDr }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageDr }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.dr > store.currentOldWorkshop.dr"
                                             :is-better="store.currentWorkshop.dr > store.currentOldWorkshop.dr" />

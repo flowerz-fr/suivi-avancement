@@ -101,8 +101,8 @@ const chartConfig = {
         theme: "light",
         custom: (series, seriesIndex, dataPointIndex, w) => {
             var properties = Object.values(store.currentWorkshop)
-            var value = properties[4 + 2 * series.dataPointIndex] // indicators start at [4] and there is the total of each indicator after each one
-            var total = properties[5 + 2 * series.dataPointIndex]
+            var value = properties[5 + 2 * series.dataPointIndex] // indicators start at [4] and there is the total of each indicator after each one
+            var total = properties[6 + 2 * series.dataPointIndex]
             return "<span class=\"px-1\">" + Math.round(value * 100 / total) + "%</span>"
         }
     },

@@ -108,6 +108,16 @@ onMounted(() => {
                 emit("openDrawer")
                 store.mountWorkshop(workshop)
                 el.children[0].classList.add("bg-selected", "text-selected")
+                /*map.flyTo({
+                    center: [workshop.x, workshop.y],
+                    speed: 0.0025,
+                    easing(t) {
+                        return t < 0.5 ?
+                            (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2 :
+                            (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2
+                    },
+                    essential: true
+                })*/
             })
             markerElList.push(el)
             new maplibregl.Marker({ element: el })

@@ -1,8 +1,9 @@
 export default class Workshop {
-    constructor(workshop, inb, projet, end, a, ta, c, tc, d, td, dr, tdr, updateDate, updateContent, x, y, image, color) {
+    constructor(workshop, inb, projet, zone, end, a, ta, c, tc, d, td, dr, tdr, updateDate, updateContent, x, y, image, color) {
         this.workshop = workshop
         this.inb = inb
         this.project = projet
+        this.zone = zone
         this.end = end // fin de chantier
         this.a = a // assainissement
         this.ta = ta // total assainissement

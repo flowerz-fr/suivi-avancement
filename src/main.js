@@ -20,7 +20,7 @@ const workshopCoordinates = [
     y: 49.6796,
     scalex: 0.17,
     scaley: 0.2,
-    image: "mau",
+    image: "MAU",
     color: "green"
   },
   { // MAPu
@@ -28,7 +28,7 @@ const workshopCoordinates = [
     y: 49.67965,
     scalex: 0.17,
     scaley: 0.2,
-    image: "mapu",
+    image: "MAPu",
     color: "green"
   },
   { // HADE
@@ -36,7 +36,7 @@ const workshopCoordinates = [
     y: 49.6789, // + goes up
     scalex: 0.25,
     scaley: 0.25,
-    image: "hade",
+    image: "HADE",
     color: "green"
   },
 ]
@@ -44,25 +44,37 @@ const workshopCoordinates = [
 fetch("/data/actuel.csv")
   .then(response => response.text())
   .then(data => {
-    var i = 0
+    var i
     const rows = data.split("\n")
     rows.shift()
     rows.forEach(row => {
+      i = 0
       const columns = row.split(",")
-      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
-      i++
+      workshopCoordinates.every(workshop => {
+        if(workshop.image == columns[0])
+          return false
+        i++
+        return true
+      })
+      useWorkshopStore().addWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[4], columns[7], columns[8], columns[5], columns[6], columns[9], columns[10], columns[11], columns[12], columns[13], columns[14], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
     })
   })
 fetch("/data/ancien.csv")
   .then(response => response.text())
   .then(data => {
-    var i = 0
+    var i
     const rows = data.split("\n")
     rows.shift()
     rows.forEach(row => {
+      i = 0
       const columns = row.split(",")
-      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[6], columns[7], columns[4], columns[5], columns[8], columns[9], columns[10], columns[11], columns[12], columns[13], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
-      i++
+      workshopCoordinates.every((workshop) => {
+        if(workshop.image == columns[0])
+          return false
+        i++
+        return true
+      })
+      useWorkshopStore().addOldWorkshop(new Workshop(columns[0], columns[1], columns[2], columns[3], columns[4], columns[7], columns[8], columns[5], columns[6], columns[9], columns[10], columns[11], columns[12], columns[13], columns[14], workshopCoordinates[i].x, workshopCoordinates[i].y, workshopCoordinates[i].image, workshopCoordinates[i].color))
     })
   })
 

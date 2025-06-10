@@ -94,6 +94,8 @@ onMounted(() => {
             labelLayerId
         )
         store.workshops.forEach((workshop) => {
+            if(workshop.zone != "4")
+                return
             const el = document.createElement('div')
             el.classList = `text-${workshop.color}`
             el.innerHTML = `

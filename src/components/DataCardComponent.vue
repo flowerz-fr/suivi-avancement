@@ -36,7 +36,7 @@ const inb = computed(() => {
             <p class="grow text-xs">Avancement</p>
             <div class="flex">
                 <span class="text-sm text-blue-600 font-bold">{{ props.evolution }}</span>
-                <EvolutionIndicatorComponent :has-changed="props.evolution.charAt(0) == '+'" :is-better="props.evolution.charAt(0) == '+'" />
+                <EvolutionIndicatorComponent :has-changed="props.evolution.includes('+')" />
             </div>
         </div>
     </div>

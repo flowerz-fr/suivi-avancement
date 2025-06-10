@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useWorkshopStore } from '@/stores/workshops'
+import { onClickOutside } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
 
 const props = defineProps({
     options: {
@@ -10,6 +12,7 @@ const props = defineProps({
 })
 const isDropdownOpen = ref(false)
 const store = useWorkshopStore()
+const target = useTemplateRef("target")
 
 const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value
@@ -23,6 +26,10 @@ const select = (option) => {
 const formatZone = (zone) => {
     return (zone.length > 1 ? "" : "Zone ") + zone
 }
+
+onClickOutside(target, () => {
+    isDropdownOpen.value = false
+})
 </script>
 
 <template>
@@ -40,7 +47,7 @@ const formatZone = (zone) => {
                 </svg>
             </button>
         </div>
-        <div v-if="isDropdownOpen"
+        <div v-if="isDropdownOpen" ref="target"
             class="absolute right-0 z-10 w-auto origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden"
             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <div class="py-1" role="none">

@@ -49,3 +49,64 @@ p {
 .text-danger {
   color: #D92D20;
 }
+
+.maplibregl-marker {
+  pointer-events: none;
+}
+
+.workshop-marker {
+  opacity: .6;
+}
+
+.workshop-marker:hover {
+  opacity: 1;
+}
+
+.bg-blue {
+  background-color: #005daf;
+}
+
+.bg-green {
+  background-color: #66a84c;
+}
+
+.bg-orange {
+  background-color: #DC8603;
+}
+
+.bg-red {
+  background-color: #C50204;
+}
+
+.workshop-marker-selected {
+  opacity: 1;
+}
+
+.text-blue {
+  color: #005daf;
+}
+
+.text-green {
+  color: #66a84c;
+}
+
+.text-orange {
+  color: #DC8603;
+}
+
+.text-red {
+  color: #C50204;
+}
+
+.smooth-redim {
+  -moz-transition: width .3 ease, height .3 ease;
+  -ms-transition: width .3 ease, height .3 ease;
+  -o-transition: width .3 ease, height .3 ease;
+  -webkit-transition: width .3 ease, height .3 ease;
+  transition: width .3 ease, height .3 ease;
+}
+
+details {
+  border: 1px var(--color-zinc-300) var(--tw-border-style);
+  box-shadow: var(--shadow-md);
+}

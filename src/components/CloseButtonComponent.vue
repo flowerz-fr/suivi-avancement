@@ -8,7 +8,7 @@ const onButtonClicked = () => {
 
 <template>
     <button type="button" @click="onButtonClicked"
-        class="absolute top-3 right-3 rounded-lg p-1 inline-flex items-center justify-center border border-zinc-300 text-zinc-600 hover:text-zinc-500 hover:bg-zinc-100/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-800 shadow-md hover:cursor-pointer">
+        class="absolute top-3 right-3 rounded-lg p-1 inline-flex items-center justify-center border border-zinc-300 text-zinc-900 hover:text-zinc-500 hover:bg-zinc-100/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-800 shadow-md hover:cursor-pointer">
         <span class="sr-only">Close menu</span>
         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
             aria-hidden="true">

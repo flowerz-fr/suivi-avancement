@@ -2,8 +2,9 @@
 import EvolutionIndicatorComponent from './EvolutionIndicatorComponent.vue'
 import CloseButtonComponent from './CloseButtonComponent.vue'
 import BarGraphComponent from './BarGraphComponent.vue'
+import SelectComponent from './SelectComponent.vue'
 import { useWorkshopStore } from '@/stores/workshops'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
     isDrawerOpen: {
@@ -11,7 +12,6 @@ const props = defineProps({
         required: true
     }
 })
-
 const store = useWorkshopStore()
 
 const emit = defineEmits(["closeDrawer"])
@@ -43,13 +43,16 @@ const percentageDr = computed(() => {
 
 <template>
     <Transition>
-        <div v-if="props.isDrawerOpen"
+        <div v-if="props.isDrawerOpen" id="testtets"
             class="absolute top-0 left-0 h-screen bg-white w-1/4 shadow-md pointer-events-auto border-r border-r-zinc-300 overflow-y-scroll">
             <img :src="'/src/assets/images/' + store.currentWorkshop.image + '.jpg'" class="w-full"
                 :alt="store.currentWorkshop.image">
             <div class="px-8 pt-4 w-full">
                 <CloseButtonComponent @action="onCloseButtonClicked" />
-                <h1 class="heading">{{ store.currentWorkshop.workshop }}</h1>
+                <div class="flex">
+                    <h1 class="heading grow">{{ store.currentWorkshop.workshop }}</h1>
+                    <SelectComponent :options="store.zoneOptions" />
+                </div>
                 <div class="my-6">
                     <h1>INB {{ store.currentWorkshop.inb }}, {{ store.currentWorkshop.project }}</h1>
                     <p class="text-sm mb-4">Fin de DEM en {{ store.currentWorkshop.end }}</p>
@@ -64,23 +67,11 @@ const percentageDr = computed(() => {
                     <div class="border-t border-gray-100">
                         <dl class="divide-y divide-gray-100">
                             <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
-                                <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
-                                    <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
-                                    <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageA }}</span>
-                                        <EvolutionIndicatorComponent
-                                            :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a"
-                                            :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
-                                    </div>
-                                </dd>
-                            </div>
-                            <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                                 <dt class="text-sm/6 sm:col-span-2 font-semibold">Caractérisation</dt>
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.c }}/{{ store.currentWorkshop.tc }}</h6>
                                     <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageC }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageC }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.c > store.currentOldWorkshop.c"
                                             :is-better="store.currentWorkshop.c > store.currentOldWorkshop.c" />
@@ -88,11 +79,23 @@ const percentageDr = computed(() => {
                                 </dd>
                             </div>
                             <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
-                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Démentèlement</dt>
+                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Assainissement</dt>
+                                <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
+                                    <h6 class="grow">{{ store.currentWorkshop.a }}/{{ store.currentWorkshop.ta }}</h6>
+                                    <div class="flex justify-end">
+                                        <span class="text-xs text-blue-600">{{ percentageA }}</span>
+                                        <EvolutionIndicatorComponent
+                                            :has-changed="store.currentWorkshop.a > store.currentOldWorkshop.a"
+                                            :is-better="store.currentWorkshop.a > store.currentOldWorkshop.a" />
+                                    </div>
+                                </dd>
+                            </div>
+                            <div class="px-4 py-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                                <dt class="text-sm/6 sm:col-span-2 font-semibold">Démantèlement</dt>
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.d }}/{{ store.currentWorkshop.td }}</h6>
                                     <div class="flex">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageD }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageD }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.d > store.currentOldWorkshop.d"
                                             :is-better="store.currentWorkshop.d > store.currentOldWorkshop.d" />
@@ -104,7 +107,7 @@ const percentageDr = computed(() => {
                                 <dd class="mt-1 text-sm/6 sm:col-span-2 sm:mt-0 text-zinc-700 flex items-center">
                                     <h6 class="grow">{{ store.currentWorkshop.dr }}/{{ store.currentWorkshop.tdr }}</h6>
                                     <div class="flex justify-end">
-                                        <span class="text-xs text-blue-600 font-bold">{{ percentageDr }}</span>
+                                        <span class="text-xs text-blue-600">{{ percentageDr }}</span>
                                         <EvolutionIndicatorComponent
                                             :has-changed="store.currentWorkshop.dr > store.currentOldWorkshop.dr"
                                             :is-better="store.currentWorkshop.dr > store.currentOldWorkshop.dr" />

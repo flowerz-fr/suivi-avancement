@@ -54,12 +54,20 @@ p {
   pointer-events: none;
 }
 
+.workshop-marker {
+  opacity: .6;
+}
+
+.workshop-marker:hover {
+  opacity: 1;
+}
+
 .bg-blue {
-  background-color: #0700AF;
+  background-color: #005daf;
 }
 
 .bg-green {
-  background-color: #66A84C;
+  background-color: #66a84c;
 }
 
 .bg-orange {
@@ -70,16 +78,16 @@ p {
   background-color: #C50204;
 }
 
-.bg-selected {
-  background-color: #ffd230;
+.workshop-marker-selected {
+  opacity: 1;
 }
 
 .text-blue {
-  color: #0700AF;
+  color: #005daf;
 }
 
 .text-green {
-  color: #66A84C;
+  color: #66a84c;
 }
 
 .text-orange {
@@ -88,10 +96,6 @@ p {
 
 .text-red {
   color: #C50204;
-}
-
-.text-selected {
-  color: #ffd230;
 }
 
 .smooth-redim {

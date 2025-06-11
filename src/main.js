@@ -17,15 +17,15 @@ app.use(router)
 const workshopCoordinates = [
   { // MAPu
     workshop: "MAPu",
-    x: -1.8838,
-    y: 49.6796,
+    x: -1.883827326956748,
+    y: 49.6795108972554,
     image: "MAPu",
     color: "green"
   },
   { // MAU
     workshop: "MAU",
-    x: -1.8832,
-    y: 49.6796,
+    x: -1.8832402885417423,
+    y: 49.67954101142942,
     image: "MAU",
     color: "green"
   },
@@ -38,50 +38,50 @@ const workshopCoordinates = [
   },
   { // HAPF
     workshop: "HAPF",
-    x: -1.882,
-    y: 49.6789,
+    x: -1.8820212273908794,
+    y: 49.67867961279319,
     image: "HAPF",
     color: "green"
   },
   { // DEG
     workshop: "DEG",
-    x: -1.88015,
-    y: 49.6784,
+    x: -1.8801696050909698,
+    y: 49.67833007041946,
     image: "DEG",
     color: "green"
   },
   { // HAO SUD
     workshop: "HAO SUD",
-    x: -1.879425,
-    y: 49.67868,
+    x: -1.8794269145908231,
+    y: 49.6786169475036,
     image: "HAO SUD",
     color: "orange"
   },
   { // HAO SILO
     workshop: "HAO SILO",
-    x: -1.879,
-    y: 49.67831,
+    x: -1.8789507853151974,
+    y: 49.67835459716562,
     image: "HAO",
     color: "orange"
   },
   { // HAO NORD
     workshop: "HAO NORD",
-    x: -1.87924,
-    y: 49.679,
+    x: -1.8792494400861983,
+    y: 49.678927508185325,
     image: "HAO",
     color: "orange"
   },
   { // HAO NV FILT
     workshop: "HAO NV FILT",
-    x: -1.87887,
-    y: 49.6786,
+    x: -1.8788788744330702,
+    y: 49.67853679626833,
     image: "HAO",
     color: "orange"
   },
   { // DFG
     workshop: "DFG",
-    x: -1.88075,
-    y: 49.67819,
+    x: -1.8806905440894184,
+    y: 49.678038027213205,
     image: "no",
     color: "green"
   },
@@ -94,29 +94,29 @@ const workshopCoordinates = [
   },
   { // SILO 130
     workshop: "SILO 130",
-    x: -1.89632,
-    y: 49.6829,
+    x: -1.8962946221881225,
+    y: 49.68287149293147,
     image: "SILO 130",
     color: "blue"
   },
   { // SILO 115
     workshop: "SILO 115",
-    x: -1.8881,
-    y: 49.6783,
+    x: -1.8880871795877567,
+    y: 49.67821059782776,
     image: "SILO 115",
     color: "blue"
   },
   { // ELAN IIB
     workshop: "ELAN IIB",
-    x: -1.88155,
-    y: 49.6775,
+    x: -1.8815146014437971,
+    y: 49.67742360418538,
     image: "ELAN IIB",
     color: "red"
   },
   { // RCB
     workshop: "RCB",
-    x: -1.886,
-    y: 49.6785,
+    x: -1.8854473476890234,
+    y: 49.67845069667257,
     image: "no",
     color: "blue"
   },

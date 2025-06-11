@@ -41,28 +41,28 @@ const displayAEvolution = computed(() => {
     var currentState = store.getCompletionA().current * 100 / store.getTotalA().current
     var oldState = store.getCompletionA().old * 100 / store.getTotalA().old
     var evolution = parseFloat((currentState - oldState).toFixed(1))
-    return Math.round(currentState) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
+    return currentState.toFixed(1) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
 })
 
 const displayCEvolution = computed(() => {
     var currentState = store.getCompletionC().current * 100 / store.getTotalC().current
     var oldState = store.getCompletionC().old * 100 / store.getTotalC().old
     var evolution = parseFloat((currentState - oldState).toFixed(1))
-    return Math.round(currentState) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
+    return currentState.toFixed(1) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
 })
 
 const displayDEvolution = computed(() => {
     var currentState = store.getCompletionD().current * 100 / store.getTotalD().current
     var oldState = store.getCompletionD().old * 100 / store.getTotalD().old
     var evolution = parseFloat((currentState - oldState).toFixed(1))
-    return Math.round(currentState) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
+    return currentState.toFixed(1) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
 })
 
 const displayDrEvolution = computed(() => {
     var currentState = store.getCompletionDr().current * 100 / store.getTotalDr().current
     var oldState = store.getCompletionDr().old * 100 / store.getTotalDr().old
     var evolution = parseFloat((currentState - oldState).toFixed(1))
-    return Math.round(currentState) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
+    return currentState.toFixed(1) + "%" + (evolution > 0 ? " (+" + evolution + "%)" : "")
 })
 </script>
 

@@ -16,93 +16,108 @@ app.use(router)
 // because data such as image name or coordinates are not included inside csv input files and are constant through time they are hardcoded here
 const workshopCoordinates = [
   { // MAPu
+    workshop: "MAPu",
     x: -1.8838,
     y: 49.6796,
     image: "MAPu",
     color: "green"
   },
   { // MAU
+    workshop: "MAU",
     x: -1.8832,
     y: 49.6796,
     image: "MAU",
     color: "green"
   },
   { // HADE
+    workshop: "HADE",
     x: -1.8802, // + goes left
     y: 49.6789, // + goes up
     image: "HADE",
     color: "green"
   },
   { // HAPF
+    workshop: "HAPF",
     x: -1.882,
     y: 49.6789,
     image: "HAPF",
     color: "green"
   },
   { // DEG
+    workshop: "DEG",
     x: -1.88015,
     y: 49.6784,
     image: "DEG",
     color: "green"
   },
   { // HAO SUD
+    workshop: "HAO SUD",
     x: -1.879425,
     y: 49.67868,
     image: "HAO SUD",
     color: "orange"
   },
   { // HAO SILO
+    workshop: "HAO SILO",
     x: -1.879,
-    y: 49.67835,
-    image: "HAO SILO",
+    y: 49.67831,
+    image: "HAO",
     color: "orange"
   },
   { // HAO NORD
+    workshop: "HAO NORD",
     x: -1.87924,
     y: 49.679,
-    image: "HAO NORD",
+    image: "HAO",
     color: "orange"
   },
   { // HAO NV FILT
-    x: 0,
-    y: 0,
-    image: "HAO NV FILT",
-    color: "blue"
+    workshop: "HAO NV FILT",
+    x: -1.87887,
+    y: 49.6786,
+    image: "HAO",
+    color: "orange"
   },
   { // DFG
+    workshop: "DFG",
     x: -1.88075,
     y: 49.67819,
-    image: "DFG",
+    image: "no",
     color: "green"
   },
   { // STE2
+    workshop: "STE2",
     x: -1.8861,
     y: 49.6787,
     image: "STE2",
     color: "blue"
   },
   { // SILO 130
+    workshop: "SILO 130",
     x: -1.89632,
     y: 49.6829,
     image: "SILO 130",
     color: "blue"
   },
   { // SILO 115
+    workshop: "SILO 115",
     x: -1.8881,
     y: 49.6783,
     image: "SILO 115",
     color: "blue"
   },
   { // ELAN IIB
+    workshop: "ELAN IIB",
     x: -1.88155,
     y: 49.6775,
     image: "ELAN IIB",
     color: "red"
   },
   { // RCB
+    workshop: "RCB",
     x: -1.886,
     y: 49.6785,
-    image: "RCB",
+    image: "no",
     color: "blue"
   },
 ]
@@ -119,7 +134,7 @@ fetch("/data/actuel.csv")
       if(columns.length == 0)
         return
       workshopCoordinates.every(workshop => {
-        if(workshop.image == columns[0])
+        if(workshop.workshop == columns[0])
           return false
         i++
         return true
@@ -139,7 +154,7 @@ fetch("/data/ancien.csv")
       if(columns.length == 0)
         return
       workshopCoordinates.every((workshop) => {
-        if(workshop.image == columns[0])
+        if(workshop.workshop == columns[0])
           return false
         i++
         return true

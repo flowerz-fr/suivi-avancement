@@ -4,7 +4,6 @@ import { useWorkshopStore } from '@/stores/workshops'
 
 const emit = defineEmits(["openDrawer", "closeDrawer"])
 const store = useWorkshopStore()
-const MAPTILER_KEY = "EDqsUDjya9TWEYog9EpZ"
 const RED = "#A2000289"
 const GREEN = "#4F843A89"
 const BLUE = "#015E8989"
@@ -545,7 +544,7 @@ onMounted(() => {
         maxZoom: 22, // close
         minZoom: 15, // far
         style:
-            `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_KEY}`,
+            `https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_API_KEY}`,
         center: [-1.878, 49.678638], // lon, lat
         pitch: 55
     })

@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, watch } from 'vue'
 import ApexCharts from 'apexcharts'
-import Workshop from '@/stores/Workshop'
 import { useWorkshopStore } from '@/stores/workshops'
 
 const store = useWorkshopStore()

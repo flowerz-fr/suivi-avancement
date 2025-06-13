@@ -75,7 +75,7 @@ const displayDrEvolution = computed(() => {
         <RightFloatingComponent :is-drawer-open="props.isDrawerOpen">
             <DataCardComponent :title="'Caractérisation'" :value="displayCValue" :evolution="displayCEvolution" />
             <DataCardComponent :title="'Assainissement'" :value="displayAValue" :evolution="displayAEvolution" />
-            <DataCardComponent :title="'Démentèlement'" :value="displayDValue" :evolution="displayDEvolution" />
+            <DataCardComponent :title="'Démantèlement'" :value="displayDValue" :evolution="displayDEvolution" />
             <DataCardComponent :title="'Déclassement radiologique'" :value="displayDrValue"
                 :evolution="displayDrEvolution" />
         </RightFloatingComponent>

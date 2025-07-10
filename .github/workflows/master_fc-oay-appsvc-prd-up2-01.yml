@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '~22'
+          node-version: '22.x'
 
       - name: npm install, build, and test
         run: |
@@ -53,4 +53,4 @@ jobs:
           app-name: 'fc-oay-appsvc-prd-up2-01'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B6461C86A2D944358E041D9F593F602E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61FEC06B6B014248AA79423A9FBB0C09 }}
